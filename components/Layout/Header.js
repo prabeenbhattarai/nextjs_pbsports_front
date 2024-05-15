@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import { useSession } from "next-auth/react";
 import Center from "@/components/Layout/Center";
+import ButtonLink from "../Button/ButtonLink";
+
 
 const ButtonWrapper = styled.div`
   display: flex;
