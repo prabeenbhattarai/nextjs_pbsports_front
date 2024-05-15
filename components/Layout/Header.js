@@ -1,0 +1,154 @@
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { styled } from "styled-components";
+import { useSession } from "next-auth/react";
+import Center from "@/components/Layout/Center";
+
+const Logo = styled.img`
+  width: 100px;
+  height: auto;
+  position: relative;
+  z-index: 3;
+`;
+
+const StyledHeader = styled.header`
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: ${({ scrolled }) => (scrolled ? "#020B2A" : "#000000")};
+  color: ${({ scrolled }) => (scrolled ? "#ffffff" : "#ffffff")};
+  transition: background-color 0.3s ease, color 0.3s ease;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+`;
+
+const NavLink = styled(Link)`
+  display: block;
+  color: ${({ scrolled }) => (scrolled ? "#ffffff" : "#ffffff")};
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  &:hover {
+    color: #ff4803;
+  }
+`;
+
+const StyledNav = styled.nav`
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const LoginIcon = styled.svg`
+  width: 24px;
+  height: 24px;
+  fill: #ffffff;
+  cursor: pointer;
+`;
+
+const UserPhoto = styled.img`
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+`;
+
+const SearchInput = styled.input`
+  padding: 0.5rem 5rem .5rem 2rem;
+  border: #fff;
+  border-radius: 20px;
+  outline: none;
+`;
+
+const SearchIcon = styled.span`
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+`;
+
+export default function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  const {data: session} = useSession();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return (
+    <StyledHeader scrolled={scrolled}>
+      <Center>
+        <Wrapper>
+          <Link href="/">
+            <Logo src="/logo.png" alt="Pb-Sports" />
+          </Link>
+          <SearchInput  scrolled={scrolled} type="text" placeholder="Search..." />
+          <StyledNav>
+            <NavLink href={"/Highlight"} scrolled={scrolled}>
+              Highlight
+            </NavLink>
+            <NavLink href={"/Cricket"} scrolled={scrolled}>
+             Cricket
+            </NavLink>
+            <NavLink href={"/Football"} scrolled={scrolled}>
+             Football
+            </NavLink>
+            
+            
+            <NavLink href={"/support"} scrolled={scrolled}>
+              Support & FAQs
+            </NavLink>
+            
+            {session ? (
+               <Link href="/user/Auth/login">
+              <UserPhoto src={session?.user?.image} alt="Pbsports" />
+              </Link>
+            ) : (
+              <Link href="/user/Auth/login">
+
+              <LoginIcon >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  color="#EC1C07"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
+              </LoginIcon>
+              </Link>
+
+            )}
+          </StyledNav>
+        </Wrapper>
+      </Center>
+    </StyledHeader>
+  );
+}
