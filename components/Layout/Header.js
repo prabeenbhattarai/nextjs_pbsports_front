@@ -4,6 +4,10 @@ import { styled } from "styled-components";
 import { useSession } from "next-auth/react";
 import Center from "@/components/Layout/Center";
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+`;
 const Logo = styled.img`
   width: 100px;
   height: auto;
