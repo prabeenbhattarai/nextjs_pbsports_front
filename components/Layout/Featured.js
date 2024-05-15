@@ -82,7 +82,7 @@ export default function Featured({ schedule }) {
               <Titleh1>Recently scheduled</Titleh1>
               <Title>{schedule.title}</Title>
               <Desc>{schedule.description}</Desc>
-              <DescTime>{formatTime(schedule.time)}</DescTime>
+              <DescTime>{formatTime(schedule.time)} NPT</DescTime>
               <ButtonWrapper>
                 
                 <ButtonLink href={'/Games/schedule/' + schedule._id} primary size="l">
