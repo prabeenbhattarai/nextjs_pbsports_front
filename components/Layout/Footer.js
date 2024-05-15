@@ -74,8 +74,7 @@ export default function Footer() {
           <Text>The live stream content provided on this website is sourced from third-party platforms. We are not the original event broadcaster and utilize these platforms to fetch live streams for our users. All rights and copyrights for the content belong to the respective broadcasters. We do not claim ownership of the content streamed through our platform. If you have any concerns regarding the content, please contact the original broadcaster directly.
       </Text> 
       </Container>
-<center><script type="text/javascript" src="//widget.supercounters.com/ssl/online_i.js"></script><script type="text/javascript">sc_online_i(1690698,"e6e6e6","000000");</script><br>
-</center>
+
 
       <Copyright>
         &copy; {new Date().getFullYear()} PbSports | Live Anytime, Anywhere | All Right Reserved. {/* Update with your company name */}
