@@ -95,7 +95,7 @@ export default function Featured({ schedule }) {
             </div>
           </Column>
           <Column>
-            <Image src="/banner.png" alt="" width={1000} height={700} />
+            <Image src="/bn1.png" alt="" width={1000} height={700} />
           </Column>
         </ColumnWrapper>
       </Center>
