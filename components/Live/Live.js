@@ -127,7 +127,7 @@ const Live = ({ schedule }) => {
   return (
     <Center>
       <>
-        <SectionTitle hide={liveItems.length === 0}>Buzz Alert</SectionTitle>
+        <SectionTitle hide={liveItems.length === 0}>Cricket Buzz Alert</SectionTitle>
         <ScheduleGridContainer>
           {liveItems.length > 6 && (
             <>
