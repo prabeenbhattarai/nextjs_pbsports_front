@@ -1,25 +1,31 @@
-// pages/api/search.js
+import { MongoClient } from 'mongodb';
 
-import clientPromise from '../../lib/mongodb';
+const client = new MongoClient(process.env.MONGODB_URI);
 
 export default async function handler(req, res) {
+  if (req.method !== 'GET') {
+    return res.status(405).end(); // Method Not Allowed
+  }
+
   const { query } = req.query;
-  
   if (!query) {
-    return res.status(400).json({ error: "Query parameter is required" });
+    return res.status(400).json({ message: 'Query parameter is required' });
   }
 
   try {
-    const client = await clientPromise;
-    const db = client.db('Pbsports'); // Replace 'yourDatabaseName' with your actual database name
+    await client.connect();
+    const database = client.db('Pbsports);
+    const collection = database.collection('test');
 
-    // Assuming you have a collection named 'yourCollectionName'
-    const collection = db.collection('test');
-    
-    const results = await collection.find({ name: { $regex: query, $options: 'i' } }).toArray();
+    const results = await collection
+      .find({ $text: { $search: query } })
+      .limit(10)
+      .toArray();
 
     res.status(200).json(results);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch data' });
+    res.status(500).json({ message: 'Internal Server Error' });
+  } finally {
+    await client.close();
   }
 }
