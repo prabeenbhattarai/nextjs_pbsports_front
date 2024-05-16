@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { styled } from "styled-components";
 import { useSession } from "next-auth/react";
 import Center from "@/components/Layout/Center";
@@ -69,51 +69,23 @@ const UserPhoto = styled.img`
 `;
 
 const SearchInput = styled.input`
-  padding: 0.5rem 5rem 0.5rem 2rem;
-  border: #fff;
+  padding: 0.5rem 2rem;
+  border: none;
   border-radius: 20px;
   outline: none;
-`;
-
-const SearchResults = styled.div`
-  position: absolute;
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #ccc;
-  width: 300px;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1001;
-  top: 50px;
-  left: 0;
-  right: 0;
-  margin: auto;
-`;
-
-const SearchResultItem = styled.div`
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-
-  &:hover {
-    background-color: #f0f0f0;
-    cursor: pointer;
-  }
+  background-color: transparent;
+  color: #fff;
 `;
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const { data: session } = useSession();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [showResults, setShowResults] = useState(false);
+  const { data: session } = useSession();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -125,17 +97,18 @@ export default function Header() {
 
   useEffect(() => {
     if (searchQuery.length > 2) {
-      const fetchSearchResults = async () => {
-        const response = await fetch(`/api/search?query=${searchQuery}`);
-        const data = await response.json();
-        setSearchResults(data);
-      };
-
-      fetchSearchResults();
+      fetch(`/api/search?query=${encodeURIComponent(searchQuery)}`)
+        .then((response) => response.json())
+        .then((data) => setSearchResults(data))
+        .catch((error) => console.error("Error fetching search results:", error));
     } else {
       setSearchResults([]);
     }
   }, [searchQuery]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
   return (
     <StyledHeader scrolled={scrolled}>
@@ -144,30 +117,13 @@ export default function Header() {
           <Link href="/">
             <Logo src="/logo.png" alt="Pb-Sports" />
           </Link>
-          <div style={{ position: 'relative' }}>
-            <SearchInput
-              scrolled={scrolled}
-              type="text"
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setShowResults(true);
-              }}
-              onBlur={() => setTimeout(() => setShowResults(false), 100)}
-            />
-            {showResults && searchResults.length > 0 && (
-              <SearchResults>
-                {searchResults.map((result, index) => (
-                  <SearchResultItem key={index}>
-                    <Link href={`/details/${result._id}`}>
-                      {result.name}
-                    </Link>
-                  </SearchResultItem>
-                ))}
-              </SearchResults>
-            )}
-          </div>
+          <SearchInput
+            scrolled={scrolled}
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
           <StyledNav>
             <NavLink href={"/Highlight"} scrolled={scrolled}>
               Highlight
