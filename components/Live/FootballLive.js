@@ -5,22 +5,20 @@ import Center from "../Layout/Center";
 import FootballBox from "./FootballBox";
 
 const ScheduleGridContainer = styled.div`
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-  position: relative; /* Position relative for absolute positioning of scroll buttons */
+  overflow-x: hidden;
+  position: relative;
 `;
 
 const ScheduleGrid = styled.div`
   display: flex;
   gap: 20px;
-  margin-top: 10px; /* Set scroll behavior for smooth scrolling */
+  margin-top: 10px;
   scroll-behavior: smooth;
-  /* Ensure the grid can be scrolled horizontally */
   overflow-x: scroll;
-  /* Hide the scrollbar */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   &::-webkit-scrollbar {
-    display: none; /* WebKit */
+    display: none;
   }
 `;
 
@@ -29,7 +27,7 @@ const SectionTitle = styled.h3`
   margin-right: 20px;
   margin-bottom: 0;
   font-size: 1.1rem;
-  display: ${({ hide }) => (hide ? "none" : "block")}; /* Hide the title only when there's no content */
+  display: ${({ hide }) => (hide ? "none" : "block")};
 `;
 
 const ScrollButton = styled.button`
@@ -37,40 +35,40 @@ const ScrollButton = styled.button`
   border: none;
   cursor: pointer;
   position: absolute;
-  top: calc(50% - 24px); /* Adjust position to be centered relative to the image */
+  top: calc(50% - 24px);
   transform: translateY(-50%);
-  z-index: 1; /* Ensure the buttons are above the content */
-  width: 48px; /* Adjust width and height of the buttons */
+  z-index: 1;
+  width: 48px;
   height: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Use border-radius to create a square shape */
   border-radius: 10px; 
-  ${({ hide }) => hide && "display: none;"} /* Hide the button when 'hide' prop is true */
+  ${({ hide }) => hide && "display: none;"}
 `;
 
 const LeftScrollButton = styled(ScrollButton)`
   left: 0;
-  visibility: ${({ show }) => (show ? 'visible' : 'hidden')}; /* Show left scroll button only when right scroll button is clicked */
+  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
 `;
 
 const RightScrollButton = styled(ScrollButton)`
   right: 0;
 `;
+
 const Tag = styled.div`
   position: absolute;
   bottom: 80px;
   left: 5px;
   padding: 5px;
-  background-color:#CAC9C9; /* Adjust background color and opacity */
-  color: black; /* Adjust text color */
+  background-color: #CAC9C9;
+  color: black;
   font-size: 10px;
-  border-radius:10px;
+  border-radius: 10px;
   font-weight: bold;
 `;
 
-const FootballLive = ({ football}) => {
+const FootballLive = ({ football }) => {
   const liveScrollRef = useRef(null);
   const recentlyScheduledScrollRef = useRef(null);
   const [showLiveLeftScroll, setShowLiveLeftScroll] = useState(false);
@@ -130,7 +128,7 @@ const FootballLive = ({ football}) => {
   return (
     <Center>
       <>
-        <SectionTitle hide={liveItems.length === 0}>Football Live </SectionTitle>
+        <SectionTitle hide={liveItems.length === 0}>Football Buzz Alert</SectionTitle>
         <ScheduleGridContainer>
           {liveItems.length > 6 && (
             <>
@@ -150,11 +148,11 @@ const FootballLive = ({ football}) => {
           )}
           <ScheduleGrid ref={liveScrollRef}>
             {liveItems.map((item) => (
-              <FootballBox key={item._id} {...item} />
+              <div key={item._id} style={{ position: 'relative' }}>
+                <FootballBox {...item} />
+                <Tag>🔴 Live now</Tag>
+              </div>
             ))}
-             <Tag>
-              🔴 Live now
-              </Tag>
           </ScheduleGrid>
         </ScheduleGridContainer>
 
@@ -170,7 +168,6 @@ const FootballLive = ({ football}) => {
               </LeftScrollButton>
               <RightScrollButton show={showRecentlyScheduledRightScroll} onClick={() => handleRecentlyScheduledScroll(300)}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
-                  <path d="M0 0h24v24H0z" fill="none"/>
                   <path d="M6 12l4 4v-3h8v-2H10V8z"/>
                 </svg>
               </RightScrollButton>
@@ -179,12 +176,9 @@ const FootballLive = ({ football}) => {
           <ScheduleGrid ref={recentlyScheduledScrollRef}>
             {recentlyScheduledItems.map((item) => (
               <FootballBox key={item._id} {...item} showScheduledTimeTag={true} />
-              
             ))}
-           
           </ScheduleGrid>
         </ScheduleGridContainer>
-       
       </>
     </Center>
   );
