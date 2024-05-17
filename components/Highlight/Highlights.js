@@ -73,7 +73,7 @@ const Highlights = ({ highlight }) => {
   return (
     <Center>
       <>
-        <SectionTitle>Event Replay</SectionTitle>
+        <SectionTitle>Cricket Replay</SectionTitle>
 
         <ScheduleGridContainer>
           {highlight.length > 6 && (
