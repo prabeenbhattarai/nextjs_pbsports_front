@@ -55,6 +55,18 @@ const RightScrollButton = styled(ScrollButton)`
   right: 0;
 `;
 
+const ScrollIcon = styled.svg`
+  width: 24px;
+  height: 24px;
+  fill: white;
+`;
+
+const LeftScrollIcon = styled(ScrollIcon)`
+  transform: rotate(0deg); /* Rotate the right-facing arrow icon to face left */
+`;
+
+const RightScrollIcon = styled(ScrollIcon)``;
+
 const Highlights = ({ highlight }) => {
   const scrollRef = useRef(null);
 
@@ -66,7 +78,9 @@ const Highlights = ({ highlight }) => {
         <ScheduleGridContainer>
           {highlight.length > 6 && (
             <LeftScrollButton hide={scrollRef.current?.scrollLeft === 0} onClick={() => scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' })}>
-              {/* Left scroll button SVG */}
+              <LeftScrollIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M8 5v14l-7-7 7-7zm8 0v14l-7-7 7-7z"/>
+              </LeftScrollIcon>
             </LeftScrollButton>
           )}
           <ScheduleGrid ref={scrollRef}>
@@ -76,7 +90,9 @@ const Highlights = ({ highlight }) => {
           </ScheduleGrid>
           {highlight.length > 6 && (
             <RightScrollButton hide={scrollRef.current?.scrollLeft === (scrollRef.current?.scrollWidth - scrollRef.current?.clientWidth)} onClick={() => scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' })}>
-              {/* Right scroll button SVG */}
+              <RightScrollIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M16 5v14l7-7-7-7zm-8 0v14l7-7-7-7z"/>
+              </RightScrollIcon>
             </RightScrollButton>
           )}
         </ScheduleGridContainer>
