@@ -111,7 +111,15 @@ export default function Header() {
   };
 
   return (
-   
+   <>
+    <Head> <title>Pbsports : Live Anytime, Anywhere</title>
+    <meta name="description" content="Pbsports : Live Anytime, Anywhere" /> 
+    <meta name="keywords" content="pbsports, pb-sports, Pbsports, PBSPORTS, PB-SPORTS, pb-Sports, Cricket Live, Football Live, cricket, football, highlights, highlight " /> 
+    <meta property="og:title" content="Pbsports : Live Anytime, Anywhere" /> 
+    <meta property="og:description" content="Pbsports : Live Anytime, Anywhere" /> 
+    <meta property="og:type" content="website" /> 
+    <meta property="og:url" content="https://www.pbsports.net/" /> 
+    <meta property="og:image" content="https://www.pbsports.net/logo.png" /> </Head>
     <StyledHeader scrolled={scrolled}>
       <Center>
         <Wrapper>
@@ -177,6 +185,7 @@ export default function Header() {
         </Wrapper>
       </Center>
     </StyledHeader>
+            </>
   );
 }
 
