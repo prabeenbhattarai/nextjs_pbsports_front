@@ -214,8 +214,9 @@ export default function SchedulePage({ schedule,footballSchedule}) {
                 <Title>{schedule.title}</Title>
                 <Description>{schedule.description}</Description>
                 {!session && (
-  <ButtonContainer>
-    <LoginButton href={'../../User/Authlogin'}>Login</LoginButton>
+ <ButtonContainer>
+     <Link href="/user/Auth/login">
+    <LoginButton >Login</LoginButton></Link>
     <AlreadyUserText>Already a user?</AlreadyUserText>
   </ButtonContainer>
 )}
