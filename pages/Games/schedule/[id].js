@@ -29,8 +29,10 @@ position: relative;
 `;
 
 const VideoFrame = styled.iframe`
-  width: 100%;
-  height: 580px;
+ height: 100vh !important;
+padding: 0;
+margin: 0;
+width: 100%;
 
 `;
 
