@@ -12,6 +12,7 @@ import { Category } from "@/models/Category";
 import FootballLive from "@/components/Live/FootballLive";
 import FootballHighlights from "@/components/Highlight/Footballhighlights";
 import UfcHighlights from "@/components/Highlight/Ufchighlights";
+import CricketHighlights from "@/components/Highlight/CricketHighlights";
 
 
 export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight}) {
@@ -23,7 +24,7 @@ export default function HomePage({featuredSchedule,liveSchedule,crickethighlight
      
       
      
-      <Highlights crickethighlight={crickethighlight} />
+      <CricketHighlights crickethighlight={crickethighlight} />
       <FootballHighlights footballhighlight={footballhighlight} />
       <UfcHighlights ufchighlight ={ufchighlight}/>
 
