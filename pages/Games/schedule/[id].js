@@ -8,6 +8,7 @@ import { styled } from "styled-components";
 import Live from "@/components/Live/Live";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 
 
@@ -29,10 +30,8 @@ position: relative;
 `;
 
 const VideoFrame = styled.iframe`
- height: 100vh !important;
-padding: 0;
-margin: 0;
-width: 100%;
+  width: 100%;
+  height: 580px;
 
 `;
 
@@ -217,7 +216,8 @@ export default function SchedulePage({ schedule,liveSchedule}) {
                 <Description>{schedule.description}</Description>
                 {!session && (
   <ButtonContainer>
-    <LoginButton href={'login'}>Login</LoginButton>
+     <Link href="/user/Auth/login">
+    <LoginButton >Login</LoginButton></Link>
     <AlreadyUserText>Already a user?</AlreadyUserText>
   </ButtonContainer>
 )}
