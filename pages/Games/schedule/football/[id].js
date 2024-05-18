@@ -8,6 +8,7 @@ import { styled } from "styled-components";
 import Live from "@/components/Live/Live";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 
 
@@ -215,9 +216,10 @@ export default function SchedulePage({ schedule,footballSchedule}) {
                 <Description>{schedule.description}</Description>
                 {!session && (
   <ButtonContainer>
-    <LoginButton href='../../user/Auth/login'>Login</LoginButton>
-    <AlreadyUserText>Already a user?</AlreadyUserText>
-  </ButtonContainer>
+  <Link href="/user/Auth/login">
+ <LoginButton >Login</LoginButton></Link>
+ <AlreadyUserText>Already a user?</AlreadyUserText>
+</ButtonContainer>
 )}
               </LeftSide>
               <RightSide>
