@@ -67,7 +67,7 @@ const LeftScrollIcon = styled(ScrollIcon)`
 
 const RightScrollIcon = styled(ScrollIcon)``;
 
-const Highlights = ({ highlight }) => {
+const CricketHighlights = ({ crickethighlight }) => {
   const scrollRef = useRef(null);
 
   return (
@@ -76,7 +76,7 @@ const Highlights = ({ highlight }) => {
         <SectionTitle>Cricket Replay</SectionTitle>
 
         <ScheduleGridContainer>
-          {highlight.length > 6 && (
+          {crickethighlight.length > 6 && (
             <LeftScrollButton hide={scrollRef.current?.scrollLeft === 0} onClick={() => scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' })}>
               <LeftScrollIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M8 5v14l-7-7 7-7zm8 0v14l-7-7 7-7z"/>
@@ -84,11 +84,11 @@ const Highlights = ({ highlight }) => {
             </LeftScrollButton>
           )}
           <ScheduleGrid ref={scrollRef}>
-            {highlight.map((highlightItem) => (
+            {crickethighlight.map((highlightItem) => (
               <HighlightBox key={highlightItem._id} {...highlightItem} />
             ))}
           </ScheduleGrid>
-          {highlight.length > 6 && (
+          {crickethighlight.length > 6 && (
             <RightScrollButton hide={scrollRef.current?.scrollLeft === (scrollRef.current?.scrollWidth - scrollRef.current?.clientWidth)} onClick={() => scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' })}>
               <RightScrollIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M16 5v14l7-7-7-7zm-8 0v14l7-7-7-7z"/>
@@ -101,4 +101,4 @@ const Highlights = ({ highlight }) => {
   );
 };
 
-export default Highlights;
+export default CricketHighlights;
