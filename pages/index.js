@@ -11,8 +11,9 @@ import { Schedule } from "@/models/Schedule";
 import { Category } from "@/models/Category";
 import FootballLive from "@/components/Live/FootballLive";
 import FootballHighlights from "@/components/Highlight/Footballhighlights";
+import UfcHighlights from "@/components/Highlight/Ufchighlights";
 
-export default function HomePage({featuredSchedule,liveSchedule,highlight, footballSchedule, footballhighlight}) {
+export default function HomePage({featuredSchedule,liveSchedule,highlight, footballSchedule, footballhighlight, ufchighlight}) {
  
    return(
 
@@ -23,6 +24,7 @@ export default function HomePage({featuredSchedule,liveSchedule,highlight, footb
       <FootballLive football={footballSchedule}/>
       <Highlights highlight={highlight} />
       <FootballHighlights footballhighlight={footballhighlight} />
+      <UfcHighlights ufchighlight ={ufchighlight} />
 
       <Footer />
     </div>
@@ -35,6 +37,8 @@ export async function getServerSideProps(){
   const featuredSchedule = await Schedule.findOne({}, null, { sort: { 'createdAt': -1 } });
   const cricketCategory = await Category.findOne({ name: 'Cricket' });
   const footballCategory = await Category.findOne({ name: 'Football' });
+  const ufcCategory = await Category.findOne({ name: 'UFC' });
+
 
 
 // Use the ObjectId in your query
@@ -72,6 +76,14 @@ const footballhighlight = await Highlight.find({
 })
 .sort({ '_id': -1 })
 .limit(10);
+const ufchighlight = await Highlight.find({
+  $or: [
+    { categories: ufcCategory._id }, // Match documents with category 'Cricket'
+    { 'categories.parent': ufcCategory._id } // Match documents with subcategory 'Cricket'
+  ]
+})
+.sort({ '_id': -1 })
+.limit(10);
 
 
   return {
@@ -81,6 +93,8 @@ const footballhighlight = await Highlight.find({
       liveSchedule: JSON.parse(JSON.stringify(liveSchedule)),
       footballSchedule: JSON.parse(JSON.stringify(footballSchedule)),
       footballhighlight: JSON.parse(JSON.stringify(footballhighlight)),
+      ufchighlight: JSON.parse(JSON.stringify(ufchighlight)),
+
 
       highlight: JSON.parse(JSON.stringify(highlight))},
 
