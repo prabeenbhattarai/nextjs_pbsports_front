@@ -1,4 +1,4 @@
-import Highlights from "@/components/Highlight/Highlights";
+import Highlights from "@/components/Highlight/CricketHighlights";
 import Featured from "@/components/Layout/Featured";
 import Footer from "@/components/Layout/Footer";
 import Header from "@/components/Layout/Header";
