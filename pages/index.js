@@ -1,4 +1,4 @@
-import Highlights from "@/components/Highlight/Highlights";
+import Highlights from "@/components/Highlight/CricketHighlights";
 import Featured from "@/components/Layout/Featured";
 import Footer from "@/components/Layout/Footer";
 import Header from "@/components/Layout/Header";
@@ -12,8 +12,11 @@ import { Category } from "@/models/Category";
 import FootballLive from "@/components/Live/FootballLive";
 import FootballHighlights from "@/components/Highlight/Footballhighlights";
 import UfcHighlights from "@/components/Highlight/Ufchighlights";
+import CricketHighlights from "@/components/Highlight/CricketHighlights";
 
-export default function HomePage({featuredSchedule,liveSchedule,highlight, footballSchedule, footballhighlight, ufchighlight}) {
+
+
+export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight}) {
  
    return(
 
@@ -22,7 +25,7 @@ export default function HomePage({featuredSchedule,liveSchedule,highlight, footb
       <Featured  schedule={featuredSchedule}/>
       <Live schedule={liveSchedule} />
       <FootballLive football={footballSchedule}/>
-      <Highlights highlight={highlight} />
+<CricketHighlights crickethighlight ={crickethighlight}/>
       <FootballHighlights footballhighlight={footballhighlight} />
       <UfcHighlights ufchighlight ={ufchighlight} />
 
@@ -60,7 +63,7 @@ const footballSchedule = await Schedule.find({
 .limit(10);
 
  // const liveSchedule = await Schedule.find({categories: 'Cricket'}, null, {sort: {'_id':-1}, limit:10});
- const highlight = await Highlight.find({
+ const crickethighlight = await Highlight.find({
   $or: [
     { categories: cricketCategory._id }, // Match documents with category 'Cricket'
     { 'categories.parent': cricketCategory._id } // Match documents with subcategory 'Cricket'
@@ -96,7 +99,7 @@ const ufchighlight = await Highlight.find({
       ufchighlight: JSON.parse(JSON.stringify(ufchighlight)),
 
 
-      highlight: JSON.parse(JSON.stringify(highlight))},
+      crickethighlight: JSON.parse(JSON.stringify(crickethighlight))},
 
 
 
