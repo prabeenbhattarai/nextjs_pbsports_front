@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { useSession } from "next-auth/react";
 import Center from "@/components/Layout/Center";
 import Link from "next/link";
@@ -46,7 +46,15 @@ const StyledNav = styled.nav`
   align-items: center;
 
   @media screen and (max-width: 768px) {
-    display: none;
+    display: ${({ showMenu }) => (showMenu ? 'flex' : 'none')};
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #020B2A;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
   }
 `;
 
@@ -64,21 +72,30 @@ const UserPhoto = styled.img`
 `;
 
 const SearchInput = styled.input`
-  padding: 0.5rem 5rem .5rem 2rem;
+  padding: 0.5rem 5rem 0.5rem 2rem;
   border: #fff;
   border-radius: 20px;
   outline: none;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
-const SearchIcon = styled.span`
-  position: absolute;
-  right: 1rem;
+const MenuIcon = styled.div`
+  display: none;
   cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    color: red;
+  }
 `;
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const {data: session} = useSession();
+  const [showMenu, setShowMenu] = useState(false);
+  const { data: session } = useSession();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -120,32 +137,38 @@ export default function Header() {
     };
   }, []);
 
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
   return (
     <StyledHeader scrolled={scrolled}>
       <Center>
         <Wrapper>
-        <Link href="/" passHref>
+          <Link href="/" passHref>
             <Logo src="/logo.png" alt="Pb-Sports" />
           </Link>
-          <SearchInput  scrolled={scrolled} type="text" placeholder="Search..." />
-          <StyledNav>
+          <SearchInput scrolled={scrolled} type="text" placeholder="Search..." />
+          <MenuIcon onClick={toggleMenu}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </MenuIcon>
+          <StyledNav showMenu={showMenu}>
             <NavLink href={"/Highlight"} scrolled={scrolled}>
               Highlight
             </NavLink>
             <NavLink href={"/Cricket"} scrolled={scrolled}>
-             Cricket
+              Cricket
             </NavLink>
             <NavLink href={"/Football"} scrolled={scrolled}>
-             Football
+              Football
             </NavLink>
-            
-            
             <NavLink href={"/support"} scrolled={scrolled}>
               Support & FAQs
             </NavLink>
-            
             {session ? (
-               <NavLink href="/user/Auth/login">
+              <NavLink href="/user/Auth/login">
                 <UserPhoto src={session?.user?.image} alt="Pbsports" />
               </NavLink>
             ) : (
