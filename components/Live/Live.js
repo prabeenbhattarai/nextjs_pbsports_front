@@ -140,7 +140,6 @@ const Live = ({ schedule }) => {
                 </LeftScrollButton>
                 <RightScrollButton show={showLiveRightScroll} onClick={() => handleLiveScroll(300)}>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
-                    <path d="M0 0h24v24H0z" fill="none"/>
                     <path d="M6 12l4 4v-3h8v-2H10V8z"/>
                   </svg>
                 </RightScrollButton>
