@@ -121,7 +121,7 @@ export default function Login() {
   useEffect(() => {
     const initializeGoogleSignIn = () => {
       google.accounts.id.initialize({
-        client_id: process.env.NEXT_PUBLIC_GOOGLE_ID,
+        client_id: process.env.GOOGLE_ID,
         callback: handleCredentialResponse,
       });
 
