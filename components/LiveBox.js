@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { styled } from "styled-components";
 
 const PlayButton = styled.div`
@@ -44,9 +43,8 @@ const PlayIcon = styled.svg`
 const Title = styled.p`
   color: #DDDADA;
   font-weight: bold;
-  padding-top:6px;
-
-  font-size: .9rem;
+  padding-top: 6px;
+  font-size: 0.9rem;
   margin: 0; /* Remove margin */
   overflow: hidden; /* Hide overflowing content */
   white-space: nowrap; /* Prevent text wrapping */
@@ -55,13 +53,13 @@ const Title = styled.p`
 `;
 
 const Description = styled.p`
-font-size: 14px;
-color: #666666; /* Grey color */
-text-decoration: none;
-overflow: hidden; /* Hide overflowing content */
-white-space: nowrap; /* Prevent text from wrapping */
-text-overflow: ellipsis; /* Add ellipsis for text overflow */
-max-width: 220px;
+  font-size: 14px;
+  color: #666666; /* Grey color */
+  text-decoration: none;
+  overflow: hidden; /* Hide overflowing content */
+  white-space: nowrap; /* Prevent text from wrapping */
+  text-overflow: ellipsis; /* Add ellipsis for text overflow */
+  max-width: 220px;
 `;
 
 const Tag = styled.div`
@@ -72,30 +70,32 @@ const Tag = styled.div`
   background-color: #F6F6F6; /* Adjust background color and opacity */
   color: #000; /* Adjust text color */
   font-size: 10px;
-  border-radius:10px;
+  border-radius: 10px;
   font-weight: bold;
 `;
 
 export default function LiveBox({ _id, title, description, url, time, images, showScheduledTimeTag }) {
-  const link = 'Games/schedule/cricket/'+_id;
+  // Ensure that required properties are present before rendering the component
+  if (!title || !description || !images || images.length === 0) {
+    return null; // Do not render the component if required properties are missing
+  }
+
+  const link = 'Games/schedule/cricket/' + _id;
 
   return (
     <Link href={link} passHref>
-
-    <LiveWrapper >
-      <ImageContainer>
-        <Image src={images[0]} alt="Pbsports"/>
-        {showScheduledTimeTag && (
-          <Tag>
-            {/* Implement logic to display scheduled time */}
-            {/* Example: 'Fri 12:00 PM' */}
-            {new Intl.DateTimeFormat('en-US', { weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: true }).format(new Date(time))}
-          </Tag>
-        )}
-      </ImageContainer>
-      <Title href={link}>{title}</Title>
-      <Description>{description}</Description>
-    </LiveWrapper>
+      <LiveWrapper>
+        <ImageContainer>
+          <Image src={images[0]} alt="Pbsports" />
+          {showScheduledTimeTag && (
+            <Tag>
+              {new Intl.DateTimeFormat('en-US', { weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: true }).format(new Date(time))}
+            </Tag>
+          )}
+        </ImageContainer>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
+      </LiveWrapper>
     </Link>
   );
 }
