@@ -34,14 +34,6 @@ const VideoFrame = styled.iframe`
   width: 100%;
 `;
 
-const LeftSide = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 50px 70px 20px;
-`;
-
 const RightSide = styled.div`
   width: 100%;
   height: 100vh;
@@ -52,6 +44,7 @@ const Image = styled.img`
   width: 100%;
   height: 100vh;
   object-fit: cover;
+  border-radius: 20px;
   opacity: 0.5;
 `;
 
@@ -61,7 +54,6 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -191,9 +183,10 @@ export default function SchedulePage({ schedule }) {
         ) : (
           <Container>
             <RightSide>
+              <Image src={schedule.images[0]} alt="Scheduled Event" />
               <Overlay>
                 <TimerContainer>
-                  {timeLeft > 0 ? `Starts in: ${formatTimeLeft(timeLeft)}` : ''}
+                  {timeLeft > 0 ? `${formatTimeLeft(timeLeft)}` : ''}
                 </TimerContainer>
                 <Title>{schedule.title}</Title>
                 <Desc>{schedule.description}</Desc>
@@ -206,7 +199,6 @@ export default function SchedulePage({ schedule }) {
                   </ButtonContainer>
                 )}
               </Overlay>
-              <Image src={schedule.images[0]} alt="Scheduled Event" />
             </RightSide>
           </Container>
         )}
