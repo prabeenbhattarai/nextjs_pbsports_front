@@ -126,61 +126,67 @@ const Live = ({ schedule }) => {
 
   return (
     <Center>
-      <>
-        <SectionTitle hide={liveItems.length === 0}>Cricket Buzz Alert</SectionTitle>
-        <ScheduleGridContainer>
-          {liveItems.length > 6 && (
-            <>
-              <LeftScrollButton show={showLiveLeftScroll} onClick={() => handleLiveScroll(-300)}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
-                  <path d="M0 0h24v24H0z" fill="none"/>
-                  <path d="M18 12l-4-4v3H6v2h8v3z"/>
-                </svg>
-              </LeftScrollButton>
-              <RightScrollButton show={showLiveRightScroll} onClick={() => handleLiveScroll(300)}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
-                  <path d="M0 0h24v24H0z" fill="none"/>
-                  <path d="M6 12l4 4v-3h8v-2H10V8z"/>
-                </svg>
-              </RightScrollButton>
-            </>
-          )}
-          <ScheduleGrid ref={liveScrollRef}>
-            {liveItems.map((item) => {
-              return (
-                <div key={item._id} style={{ position: 'relative' }}>
-                  <LiveBox {...item} />
-                  <Tag>🔴 Live now</Tag>
-                </div>
-              );
-            })}
-          </ScheduleGrid>
-        </ScheduleGridContainer>
+      {liveItems.length > 0 && (
+        <>
+          <SectionTitle>Cricket Buzz Alert</SectionTitle>
+          <ScheduleGridContainer>
+            {liveItems.length > 6 && (
+              <>
+                <LeftScrollButton show={showLiveLeftScroll} onClick={() => handleLiveScroll(-300)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M18 12l-4-4v3H6v2h8v3z"/>
+                  </svg>
+                </LeftScrollButton>
+                <RightScrollButton show={showLiveRightScroll} onClick={() => handleLiveScroll(300)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M6 12l4 4v-3h8v-2H10V8z"/>
+                  </svg>
+                </RightScrollButton>
+              </>
+            )}
+            <ScheduleGrid ref={liveScrollRef}>
+              {liveItems.map((item) => {
+                return (
+                  <div key={item._id} style={{ position: 'relative' }}>
+                    <LiveBox {...item} />
+                    <Tag>🔴 Live now</Tag>
+                  </div>
+                );
+              })}
+            </ScheduleGrid>
+          </ScheduleGridContainer>
+        </>
+      )}
 
-        <SectionTitle hide={recentlyScheduledItems.length === 0}>Upcoming Cricket Events</SectionTitle>
-        <ScheduleGridContainer>
-          {recentlyScheduledItems.length > 6 && (
-            <>
-              <LeftScrollButton show={showRecentlyScheduledLeftScroll} onClick={() => handleRecentlyScheduledScroll(-300)}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
-                  <path d="M0 0h24v24H0z" fill="none"/>
-                  <path d="M18 12l-4-4v3H6v2h8v3z"/>
-                </svg>
-              </LeftScrollButton>
-              <RightScrollButton show={showRecentlyScheduledRightScroll} onClick={() => handleRecentlyScheduledScroll(300)}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
-                  <path d="M6 12l4 4v-3h8v-2H10V8z"/>
-                </svg>
-              </RightScrollButton>
-            </>
-          )}
-          <ScheduleGrid ref={recentlyScheduledScrollRef}>
-            {recentlyScheduledItems.map((item) => (
-              <LiveBox key={item._id} {...item} showScheduledTimeTag={true} />
-            ))}
-          </ScheduleGrid>
-        </ScheduleGridContainer>
-      </>
+      {recentlyScheduledItems.length > 0 && (
+        <>
+          <SectionTitle>Upcoming Cricket Events</SectionTitle>
+          <ScheduleGridContainer>
+            {recentlyScheduledItems.length > 6 && (
+              <>
+                <LeftScrollButton show={showRecentlyScheduledLeftScroll} onClick={() => handleRecentlyScheduledScroll(-300)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M18 12l-4-4v3H6v2h8v3z"/>
+                  </svg>
+                </LeftScrollButton>
+                <RightScrollButton show={showRecentlyScheduledRightScroll} onClick={() => handleRecentlyScheduledScroll(300)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
+                    <path d="M6 12l4 4v-3h8v-2H10V8z"/>
+                  </svg>
+                </RightScrollButton>
+              </>
+            )}
+            <ScheduleGrid ref={recentlyScheduledScrollRef}>
+              {recentlyScheduledItems.map((item) => (
+                <LiveBox key={item._id} {...item} showScheduledTimeTag={true} />
+              ))}
+            </ScheduleGrid>
+          </ScheduleGridContainer>
+        </>
+      )}
     </Center>
   );
 };
