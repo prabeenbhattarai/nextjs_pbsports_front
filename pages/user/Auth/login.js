@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
+import Image from 'next/image';
+import styled from "styled-components";
 import Footer from "@/components/Layout/Footer";
 import Header from "@/components/Layout/Header";
-import styled from "styled-components";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { useState } from "react";
-import Image from 'next/image';
 
 const StyledContainer = styled.div`
   position: relative;
@@ -33,17 +33,11 @@ const ContentContainer = styled.div`
 const CardContainer = styled.div`
   margin: 0 auto;
   max-width: 30rem;
-  background-color: #fff;
+  background-color: #000;
   border-radius: 1rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
   padding: 2rem;
-  background-color: #000;
   color: #fff;
-`;
-
-const Logo = styled.img`
-  width: 4.5rem;
-  margin-bottom: 2rem;
 `;
 
 const Title = styled.h2`
@@ -51,7 +45,6 @@ const Title = styled.h2`
   font-weight: bold;
   color: #fff;
   margin-bottom: 2rem;
-  
 `;
 
 const Button = styled.button`
@@ -67,7 +60,7 @@ const Button = styled.button`
   font-size: 0.875rem;
   font-weight: bold;
   transition: all 0.3s ease;
-  cursor:pointer;
+  cursor: pointer;
 
   &:hover {
     border-color: #d20d0d;
@@ -95,6 +88,7 @@ const Divider = styled.div`
     font-size: 0.75rem;
   }
 `;
+
 const UserPhoto = styled.img`
   width: 50px;
   height: 50px;
@@ -113,25 +107,48 @@ const AgreementText = styled.p`
     margin-right: 0.25rem;
   }
 `;
+
 const Copyright = styled.div`
   text-align: center;
-  margin-top: 20px; /* Adjust spacing from the links */
+  margin-top: 20px; 
   font-size: 0.8rem;
   color: #aaa;
-
 `;
 
 export default function Login() {
   const { data: session } = useSession();
-  const [showPopup, setShowPopup] = useState(false);
 
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
-  };
+  useEffect(() => {
+    const initializeGoogleSignIn = () => {
+      google.accounts.id.initialize({
+        client_id: process.env.NEXT_PUBLIC_GOOGLE_ID,
+        callback: handleCredentialResponse,
+      });
+
+      google.accounts.id.prompt((notification) => {
+        if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+          console.log('One Tap prompt not displayed or skipped');
+        } else {
+          console.log('One Tap prompt displayed');
+        }
+      });
+    };
+
+    const handleCredentialResponse = (response) => {
+      console.log('Encoded JWT ID token: ' + response.credential);
+      signIn('google', { id_token: response.credential });
+    };
+
+    // Wait for the Google Identity Services script to load
+    if (typeof window !== 'undefined' && window.google) {
+      initializeGoogleSignIn();
+    } else {
+      window.onload = initializeGoogleSignIn;
+    }
+  }, []);
 
   const handleLogout = async () => {
     await signOut();
-    // Redirect to homepage after logout
     window.location.href = '/';
   };
 
@@ -141,27 +158,25 @@ export default function Login() {
       <StyledContainer>
         <ContentContainer>
           <CardContainer>
-            
             {!session ? (
               <>
-              <Title>Now just one click  to unlock the best</Title>
-              <p style={{ color:'red'}}>Log in with</p>
+                <Title>Now just one click to unlock the best</Title>
+                <p style={{ color:'red'}}>Log in with</p>
                 <Button onClick={() => signIn('google')}>
                   <Image
                     src="https://tailus.io/sources/blocks/social/preview/images/google.svg"
                     alt="google logo"
                     width={30}
-                   height={30}>
-                    </Image>
+                    height={30}
+                  />
                   <ButtonText>Continue with Google</ButtonText>
                 </Button>
-               
               </>
             ) : (
               <>
-              <Title>You are logged as</Title>
+                <Title>You are logged in as</Title>
                 <div>
-                <UserPhoto src={session.user.image} alt="Pbsports"></UserPhoto>
+                  <UserPhoto src={session.user.image} alt="User Photo" />
                   <h4>{session.user.name}</h4>
                   <h4>{session.user.email}</h4>
                 </div>
@@ -180,7 +195,7 @@ export default function Login() {
         </ContentContainer>
       </StyledContainer>
       <Copyright>
-        &copy; {new Date().getFullYear()} PbSports | Live Anytime, Anywhere | All Right Reserved. {/* Update with your company name */}
+        &copy; {new Date().getFullYear()} PbSports | Live Anytime, Anywhere | All Rights Reserved.
       </Copyright>
     </>
   );
