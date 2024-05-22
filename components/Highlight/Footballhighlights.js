@@ -73,7 +73,9 @@ const FootballHighlights = ({ footballhighlight }) => {
   return (
     <Center>
       <>
-        <SectionTitle>Football Replay</SectionTitle>
+        {footballhighlight.length > 0 && (
+          <SectionTitle>Football Replay</SectionTitle>
+        )}
 
         <ScheduleGridContainer>
           {footballhighlight.length > 6 && (
