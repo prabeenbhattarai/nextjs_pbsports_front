@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from 'next/router';
 
 const Container = styled.div`
   display: flex;
@@ -137,6 +138,7 @@ export default function SchedulePage({ schedule }) {
   const { data: session } = useSession();
   const [showVideo, setShowVideo] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const scheduledTime = new Date(schedule.time).getTime();
@@ -162,45 +164,61 @@ export default function SchedulePage({ schedule }) {
     }
   }, [schedule]);
 
+  useEffect(() => {
+    if (showVideo && !session) {
+      router.push('/user/Auth/login'); // Redirect to login page if not logged in
+    }
+  }, [showVideo, session, router]);
+
   return (
     <>
       <Header />
       <Container>
         {showVideo ? (
-          <VideoContainer>
-            <VideoFrame
-              src={schedule.url}
-              allowFullScreen
-              allowTransparency="true"
-              frameBorder="0"
-            ></VideoFrame>
-            <Center>
-              <WatchingText>Now Watching:</WatchingText>
-              <Title>{schedule.title}</Title>
-              <Desc>{schedule.description}</Desc>
-            </Center>
-          </VideoContainer>
-        ) : (
-          <Container>
+          session ? (
+            <VideoContainer>
+              <VideoFrame
+                src={schedule.url}
+                allowFullScreen
+                allowTransparency="true"
+                frameBorder="0"
+              ></VideoFrame>
+              <Center>
+                <WatchingText>Now Watching:</WatchingText>
+                <Title>{schedule.title}</Title>
+                <Desc>{schedule.description}</Desc>
+              </Center>
+            </VideoContainer>
+          ) : (
             <RightSide>
               <Image src={schedule.images[0]} alt="Scheduled Event" />
               <Overlay>
-                <TimerContainer>
-                  {timeLeft > 0 ? `${formatTimeLeft(timeLeft)}` : ''}
-                </TimerContainer>
-                <Title>{schedule.title}</Title>
-                <Desc>{schedule.description}</Desc>
-                {!session && (
-                  <ButtonContainer>
-                    <Link href="/user/Auth/login">
-                      <LoginButton>Login</LoginButton>
-                    </Link>
-                    <AlreadyUserText>Already a user?</AlreadyUserText>
-                  </ButtonContainer>
-                )}
+                <Title>Please log in to watch the video</Title>
+                <Link href="/user/Auth/login">
+                  <LoginButton>Login</LoginButton>
+                </Link>
               </Overlay>
             </RightSide>
-          </Container>
+          )
+        ) : (
+          <RightSide>
+            <Image src={schedule.images[0]} alt="Scheduled Event" />
+            <Overlay>
+              <TimerContainer>
+                {timeLeft > 0 ? `${formatTimeLeft(timeLeft)}` : ''}
+              </TimerContainer>
+              <Title>{schedule.title}</Title>
+              <Desc>{schedule.description}</Desc>
+              {!session && (
+                <ButtonContainer>
+                  <Link href="/user/Auth/login">
+                    <LoginButton>Login</LoginButton>
+                  </Link>
+                  <AlreadyUserText>Already a user?</AlreadyUserText>
+                </ButtonContainer>
+              )}
+            </Overlay>
+          </RightSide>
         )}
       </Container>
       <Footer />
