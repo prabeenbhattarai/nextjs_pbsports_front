@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from 'next/image';
 import styled from "styled-components";
@@ -20,6 +20,7 @@ const ContentContainer = styled.div`
   text-align: center;
   border-radius: 20px;
   border: 2px solid #fff;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
 
   @media screen and (min-width: 768px) {
     padding: 0 2rem;
@@ -35,9 +36,12 @@ const CardContainer = styled.div`
   max-width: 30rem;
   background-color: #000;
   border-radius: 1rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
   padding: 2rem;
   color: #fff;
+
+  @media screen and (max-width: 480px) {
+    padding: 1rem;
+  }
 `;
 
 const Title = styled.h2`
@@ -45,6 +49,10 @@ const Title = styled.h2`
   font-weight: bold;
   color: #fff;
   margin-bottom: 2rem;
+
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 const Button = styled.button`
@@ -70,6 +78,11 @@ const Button = styled.button`
   &:not(:last-child) {
     margin-bottom: 1rem;
   }
+
+  @media screen and (max-width: 480px) {
+    height: 2.5rem;
+    font-size: 0.75rem;
+  }
 `;
 
 const ButtonText = styled.span`
@@ -93,6 +106,11 @@ const UserPhoto = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
+
+  @media screen and (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 const AgreementText = styled.p`
@@ -106,6 +124,10 @@ const AgreementText = styled.p`
     margin-left: 0.25rem;
     margin-right: 0.25rem;
   }
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.65rem;
+  }
 `;
 
 const Copyright = styled.div`
@@ -113,6 +135,10 @@ const Copyright = styled.div`
   margin-top: 20px; 
   font-size: 0.8rem;
   color: #aaa;
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+  }
 `;
 
 export default function Login() {
