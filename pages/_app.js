@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import NextNProgress from 'nextjs-progressbar';
 import { SessionProvider } from "next-auth/react";
-import GoogleSignIn from '@/components/GoogleSignIn'; // Import the GoogleSignIn component
+import GoogleSignIn from '@/components/GoogleSignIn';
 
 const GlobalStyles = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,900;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }) {
         <GlobalStyles />
         <NextNProgress color="#1AA211" startPosition={0.3} stopDelayMs={200} height={5} showOnShallow={true} />
         <Component {...pageProps} />
-        <GoogleSignIn /> {/* Add the GoogleSignIn component */}
+        <GoogleSignIn />
       </>
     </SessionProvider>
   );
