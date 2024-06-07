@@ -1,30 +1,27 @@
-// pages/api/images.js
-import { S3Client, ListObjectsV2Command } from "@aws-sdk/client-s3";
+import axios from 'axios';
 
-const bucketName = "pbsports";
-const pbsports = new S3Client({
-  endpoint: `https://${process.env.ACCOUNT_ID}.r2.cloudflarestorage.com`,
-  region: "auto",
-  credentials: {
-    accessKeyId: process.env.S3_ACCESS_KEY,
-    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-  },
-});
+const bucketName = 'pbsports';
+const pub = 'pub-286a1a3ce1784237a33c76a3f5cf95d3';
 
 export default async function handler(req, res) {
   try {
-    const command = new ListObjectsV2Command({
-      Bucket: bucketName,
-      Prefix: "banner/",
+    const response = await axios.get(`https://${process.env.ACCOUNT_ID}.r2.cloudflarestorage.com/${bucketName}?prefix=banner/`, {
+      headers: {
+        'Authorization': `AWS ${process.env.S3_ACCESS_KEY}:${process.env.S3_SECRET_ACCESS_KEY}`,
+      },
     });
-    const data = await pbsports.send(command);
-    const images = data.Contents.map((item) => ({
-      url: `https://${process.env.CLOUDFLARE_R2_PUBLIC_URL}/${item.Key}`,
-      key: item.Key,
+
+    // Parse the XML response to extract the image URLs
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(response.data, "text/xml");
+    const keys = xmlDoc.getElementsByTagName("Key");
+    const imageUrls = Array.from(keys).map(key => ({
+      url: `https://${pub}.r2.dev/${key.textContent}`
     }));
-    res.status(200).json(images);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to fetch images" });
+
+    res.status(200).json(imageUrls);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error fetching images' });
   }
 }
