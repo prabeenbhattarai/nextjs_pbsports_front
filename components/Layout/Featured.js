@@ -27,7 +27,7 @@ const FadeOffImage = styled(Image)`
 
 export default function Featured({ schedule }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [images, setImages] = useState(['/image1.png', '/image2.png', '/image3.png']);
+  const [images, setImages] = useState(['/image3.png', '/image2.png']);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
