@@ -2,7 +2,7 @@ import Link from "next/link";
 import { styled } from "styled-components";
 import Center from "./Center";
 
-onst FooterWrapper = styled.footer`
+const FooterWrapper = styled.footer`
   background-color: #000; /* Black background color */
   color: #fff; /* White text color */
   padding: 20px;
