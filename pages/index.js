@@ -17,7 +17,7 @@ import NationalLive from "@/components/Live/NationalGames/NationalLive";
 
 
 
-export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight}) {
+export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national}) {
  
    return(
 
