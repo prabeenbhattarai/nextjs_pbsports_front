@@ -142,6 +142,29 @@ export default function Header() {
   };
 
   return (
+    <>
+     <Head>
+        <title>PBsports | Live Anytime, Anywhere</title>
+        <meta name="description" content="PBsports is live streaming platform that stream live events and matches like Cricket, Football, Formula1 as well as UFc boxing and their highlights too ." />
+        <meta name="keywords" content="PBSPORTS, pbsports.net, pbSports, Cricket, Football, cricket football live stream, nepali live stream, free pbsports live stream, highlight, pbsports highlight,PBSPORTS, NEPALI STREAMER, nepals crixket team, CANN, pbsports live
+" />
+        <link rel="canonical" href="https://www.pbsports.net/" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="PBSports : Live Anytime, Anywhere" />
+        <meta property="og:description" content="PBsports : Watch Live Anytime, Anywhere" />
+        <meta property="og:image" content="https://www.pbsports.net/logo.png" />
+        <meta property="og:url" content="https://www.pbsports.net/" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="PBsports : Watch Live Anytime, Anywhere" />
+        <meta name="twitter:description" content="PBsports : Watch Live Anytime, Anywhere" />
+        <meta name="twitter:image" content="https://www.pbsports.net/logo.png" />
+        <meta name="author" content="PBsports" />
+        <link rel="alternate" href="https://www.pbsports.net/" hreflang="es" />
+        <meta charset="UTF-8" />
+      </Head>
+    
     <StyledHeader scrolled={scrolled}>
       <Center>
         <Wrapper>
@@ -191,5 +214,6 @@ export default function Header() {
         </Wrapper>
       </Center>
     </StyledHeader>
+            </>
   );
 }
