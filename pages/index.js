@@ -23,13 +23,13 @@ export default function HomePage({featuredSchedule,liveSchedule,crickethighlight
 
     <div> 
       <Header />
-      <Featured  schedule={featuredSchedule}/> // Featured Title in Banner
-      <Live schedule={liveSchedule} /> // Cricket upcomg schedule
-      <FootballLive football={footballSchedule}/> // football upcoming events
-        <NationalLive national={national}/> // national upcoming events
-<CricketHighlights crickethighlight ={crickethighlight}/> //Cricket Highlight
-      <FootballHighlights footballhighlight={footballhighlight} /> // Football Highlights
-      <UfcHighlights ufchighlight ={ufchighlight} /> // UFC Highlights
+      <Featured  schedule={featuredSchedule}/> 
+      <Live schedule={liveSchedule} />
+      <FootballLive football={footballSchedule}/> 
+        <NationalLive national={national}/> 
+<CricketHighlights crickethighlight ={crickethighlight}/> 
+      <FootballHighlights footballhighlight={footballhighlight} />
+      <UfcHighlights ufchighlight ={ufchighlight} />
 
       <Footer />
     </div>
