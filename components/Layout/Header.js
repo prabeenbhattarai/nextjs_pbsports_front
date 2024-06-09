@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useSession } from "next-auth/react";
 import Center from "@/components/Layout/Center";
 import Link from "next/link";
+import Head from 'next/head';
+
 
 const Logo = styled.img`
   width: 100px;
