@@ -250,7 +250,7 @@ export async function getServerSideProps(context) {
   await mongooseConnect();
   const { id } = context.query;
   const schedule = await Schedule.findById(id);
-  const footballSchedule = await Schedule.find({}, null, {sort: {'_id':-1}, limit:10});
+  const national = await Schedule.find({}, null, {sort: {'_id':-1}, limit:10});
   return {
     props: {
       schedule: JSON.parse(JSON.stringify(schedule)),
