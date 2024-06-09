@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+"import { useState, useRef, useEffect } from "react";
 import { styled } from "styled-components";
 import LiveBox from "../LiveBox";
 import Center from "../Layout/Center";
@@ -14,7 +14,7 @@ const ScheduleGrid = styled.div`
   gap: 20px;
   margin-top: 10px;
   scroll-behavior: smooth;
-  overflow-x: auto;
+  overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
@@ -49,6 +49,7 @@ const ScrollButton = styled.button`
 
 const LeftScrollButton = styled(ScrollButton)`
   left: 0;
+  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
 `;
 
 const RightScrollButton = styled(ScrollButton)`
@@ -99,43 +100,29 @@ const FootballLive = ({ football }) => {
     if (liveScrollRef.current) {
       liveScrollRef.current.scrollLeft = 0;
       setShowLiveLeftScroll(false);
-      setShowLiveRightScroll(live.length > 6);
     }
     if (recentlyScheduledScrollRef.current) {
       recentlyScheduledScrollRef.current.scrollLeft = 0;
       setShowRecentlyScheduledLeftScroll(false);
-      setShowRecentlyScheduledRightScroll(recentlyScheduled.length > 6);
     }
   }, [football]);
 
   const handleLiveScroll = (scrollOffset) => {
-    if (liveScrollRef.current) {
-      liveScrollRef.current.scrollBy({
-        left: scrollOffset,
-        behavior: 'smooth',
-      });
+    liveScrollRef.current.scrollBy({
+      left: scrollOffset,
+      behavior: 'smooth',
+    });
 
-      setShowLiveLeftScroll(liveScrollRef.current.scrollLeft > 0);
-      setShowLiveRightScroll(
-        liveScrollRef.current.scrollLeft + liveScrollRef.current.clientWidth <
-        liveScrollRef.current.scrollWidth
-      );
-    }
+    setShowLiveLeftScroll(true);
   };
 
   const handleRecentlyScheduledScroll = (scrollOffset) => {
-    if (recentlyScheduledScrollRef.current) {
-      recentlyScheduledScrollRef.current.scrollBy({
-        left: scrollOffset,
-        behavior: 'smooth',
-      });
+    recentlyScheduledScrollRef.current.scrollBy({
+      left: scrollOffset,
+      behavior: 'smooth',
+    });
 
-      setShowRecentlyScheduledLeftScroll(recentlyScheduledScrollRef.current.scrollLeft > 0);
-      setShowRecentlyScheduledRightScroll(
-        recentlyScheduledScrollRef.current.scrollLeft + recentlyScheduledScrollRef.current.clientWidth <
-        recentlyScheduledScrollRef.current.scrollWidth
-      );
-    }
+    setShowRecentlyScheduledLeftScroll(true);
   };
 
   return (
@@ -145,13 +132,13 @@ const FootballLive = ({ football }) => {
         <ScheduleGridContainer>
           {liveItems.length > 6 && (
             <>
-              <LeftScrollButton hide={!showLiveLeftScroll} onClick={() => handleLiveScroll(-300)}>
+              <LeftScrollButton show={showLiveLeftScroll} onClick={() => handleLiveScroll(-300)}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
                   <path d="M0 0h24v24H0z" fill="none"/>
                   <path d="M18 12l-4-4v3H6v2h8v3z"/>
                 </svg>
               </LeftScrollButton>
-              <RightScrollButton hide={!showLiveRightScroll} onClick={() => handleLiveScroll(300)}>
+              <RightScrollButton show={showLiveRightScroll} onClick={() => handleLiveScroll(300)}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
                   <path d="M0 0h24v24H0z" fill="none"/>
                   <path d="M6 12l4 4v-3h8v-2H10V8z"/>
@@ -173,13 +160,13 @@ const FootballLive = ({ football }) => {
         <ScheduleGridContainer>
           {recentlyScheduledItems.length > 6 && (
             <>
-              <LeftScrollButton hide={!showRecentlyScheduledLeftScroll} onClick={() => handleRecentlyScheduledScroll(-300)}>
+              <LeftScrollButton show={showRecentlyScheduledLeftScroll} onClick={() => handleRecentlyScheduledScroll(-300)}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
                   <path d="M0 0h24v24H0z" fill="none"/>
                   <path d="M18 12l-4-4v3H6v2h8v3z"/>
                 </svg>
               </LeftScrollButton>
-              <RightScrollButton hide={!showRecentlyScheduledRightScroll} onClick={() => handleRecentlyScheduledScroll(300)}>
+              <RightScrollButton show={showRecentlyScheduledRightScroll} onClick={() => handleRecentlyScheduledScroll(300)}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
                   <path d="M6 12l4 4v-3h8v-2H10V8z"/>
                 </svg>
@@ -197,4 +184,4 @@ const FootballLive = ({ football }) => {
   );
 };
 
-export default FootballLive;
+export default FootballLive;"
