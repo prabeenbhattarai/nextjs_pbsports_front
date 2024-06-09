@@ -108,10 +108,10 @@ const national = await Schedule.find({
       footballSchedule: JSON.parse(JSON.stringify(footballSchedule)),
       footballhighlight: JSON.parse(JSON.stringify(footballhighlight)),
       ufchighlight: JSON.parse(JSON.stringify(ufchighlight)),
+         national: JSON.parse(JSON.stringify(national)),
 
 
       crickethighlight: JSON.parse(JSON.stringify(crickethighlight))},
-         national: JSON.parse(JSON.stringify(national)),
 
 
 
