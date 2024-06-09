@@ -80,7 +80,7 @@ export default function CopaBox({ _id, title, description, url, time, images, sh
     return null; // Do not render the component if required properties are missing
   }
 
-  const link = '/Games/schedule/CopaAmerica/' + _id;
+  const link = '/Games/schedule/football/CopaAmerica/' + _id;
 
   return (
     <Link href={link} passHref>
