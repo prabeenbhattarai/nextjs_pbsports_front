@@ -53,6 +53,7 @@ const LeftScrollButton = styled(ScrollButton)`
 
 const RightScrollButton = styled(ScrollButton)`
   right: 0;
+  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
 `;
 
 const Tag = styled.div`
@@ -99,10 +100,12 @@ const Live = ({ schedule }) => {
     if (liveScrollRef.current) {
       liveScrollRef.current.scrollLeft = 0;
       setShowLiveLeftScroll(false);
+      setShowLiveRightScroll(live.length > 6);
     }
     if (recentlyScheduledScrollRef.current) {
       recentlyScheduledScrollRef.current.scrollLeft = 0;
       setShowRecentlyScheduledLeftScroll(false);
+      setShowRecentlyScheduledRightScroll(recentlyScheduled.length > 6);
     }
   }, [schedule]);
 
@@ -112,7 +115,8 @@ const Live = ({ schedule }) => {
       behavior: 'smooth',
     });
 
-    setShowLiveLeftScroll(true);
+    setShowLiveLeftScroll(liveScrollRef.current.scrollLeft + scrollOffset > 0);
+    setShowLiveRightScroll(liveScrollRef.current.scrollWidth > liveScrollRef.current.scrollLeft + scrollOffset + liveScrollRef.current.clientWidth);
   };
 
   const handleRecentlyScheduledScroll = (scrollOffset) => {
@@ -121,7 +125,8 @@ const Live = ({ schedule }) => {
       behavior: 'smooth',
     });
 
-    setShowRecentlyScheduledLeftScroll(true);
+    setShowRecentlyScheduledLeftScroll(recentlyScheduledScrollRef.current.scrollLeft + scrollOffset > 0);
+    setShowRecentlyScheduledRightScroll(recentlyScheduledScrollRef.current.scrollWidth > recentlyScheduledScrollRef.current.scrollLeft + scrollOffset + recentlyScheduledScrollRef.current.clientWidth);
   };
 
   return (
