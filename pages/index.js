@@ -9,7 +9,7 @@ import { mongooseConnect } from "@/lib/mongoose";
 import { Highlight } from "@/models/Highlight";
 import { Schedule } from "@/models/Schedule";
 import { Category } from "@/models/Category";
-import FootballLive from "@/components/Live/FootballLive";
+import FootballLive from "@/components/Live/football/FootballLive";
 import FootballHighlights from "@/components/Highlight/Footballhighlights";
 import UfcHighlights from "@/components/Highlight/Ufchighlights";
 import CricketHighlights from "@/components/Highlight/CricketHighlights";
