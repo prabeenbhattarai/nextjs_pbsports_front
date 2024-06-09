@@ -134,8 +134,8 @@ const copa = await Schedule.find({
 .limit(10);
 const epl = await Schedule.find({
   $or: [
-    { categories: eplCategory._id }, // Match documents with category 'Cricket'
-    { 'categories.parent': eplCategory._id } // Match documents with subcategory 'Cricket'
+    { categories: EplCategory._id }, // Match documents with category 'Cricket'
+    { 'categories.parent': EplCategory._id } // Match documents with subcategory 'Cricket'
   ]
 })
 .sort({ '_id': -1 })
