@@ -14,7 +14,7 @@ import FootballHighlights from "@/components/Highlight/Footballhighlights";
 import UfcHighlights from "@/components/Highlight/Ufchighlights";
 import CricketHighlights from "@/components/Highlight/CricketHighlights";
 import NationalLive from "@/components/Live/NationalGames/NationalLive";
-import NationalLive from "@/components/Live/Formula1/FormulaLive";
+import FormulaLive from "@/components/Live/Formula1/FormulaLive";
 
 
 
