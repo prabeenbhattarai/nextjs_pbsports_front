@@ -14,10 +14,12 @@ import FootballHighlights from "@/components/Highlight/Footballhighlights";
 import UfcHighlights from "@/components/Highlight/Ufchighlights";
 import CricketHighlights from "@/components/Highlight/CricketHighlights";
 import NationalLive from "@/components/Live/NationalGames/NationalLive";
+import NationalLive from "@/components/Live/Formula1/FormulaLive";
 
 
 
-export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national}) {
+
+export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national,formula}) {
  
    return(
 
@@ -27,6 +29,8 @@ export default function HomePage({featuredSchedule,liveSchedule,crickethighlight
       <Live schedule={liveSchedule} />
       <FootballLive football={footballSchedule}/> 
         <NationalLive national={national}/> 
+            <FormulaLive formula={formula}/> 
+
 <CricketHighlights crickethighlight ={crickethighlight}/> 
       <FootballHighlights footballhighlight={footballhighlight} />
       <UfcHighlights ufchighlight ={ufchighlight} />
@@ -44,6 +48,8 @@ export async function getServerSideProps(){
   const footballCategory = await Category.findOne({ name: 'Football' });
   const ufcCategory = await Category.findOne({ name: 'UFC' });
    const nationalCategory = await Category.findOne({ name: 'NationalGames' });
+    const formulaCategory = await Category.findOne({ name: 'Formula1' });
+
 
 
 
@@ -99,6 +105,14 @@ const national = await Schedule.find({
 })
 .sort({ '_id': -1 })
 .limit(10);
+ const formula = await Schedule.find({
+  $or: [
+    { categories: formulaCategory._id }, // Match documents with category 'Cricket'
+    { 'categories.parent': formulaCategory._id } // Match documents with subcategory 'Cricket'
+  ]
+})
+.sort({ '_id': -1 })
+.limit(10);
 
   return {
     props: 
@@ -109,6 +123,8 @@ const national = await Schedule.find({
       footballhighlight: JSON.parse(JSON.stringify(footballhighlight)),
       ufchighlight: JSON.parse(JSON.stringify(ufchighlight)),
            national: JSON.parse(JSON.stringify(national)),
+                formula: JSON.parse(JSON.stringify(formula)),
+
 
 
 
