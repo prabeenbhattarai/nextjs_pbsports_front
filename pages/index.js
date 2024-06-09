@@ -15,8 +15,8 @@ import UfcHighlights from "@/components/Highlight/Ufchighlights";
 import CricketHighlights from "@/components/Highlight/CricketHighlights";
 import NationalLive from "@/components/Live/NationalGames/NationalLive";
 import FormulaLive from "@/components/Live/Formula1/FormulaLive";
-import CopaLive from "@/components/Live/Football/CopaAmerica/CopaLive";
-import EplLive from "@/components/Live/Football/EPL/EplLive";
+import CopaLive from "@/components/Live/football/CopaAmerica/CopaLive";
+import EplLive from "@/components/Live/football/EPL/EplLive";
 
 
 
