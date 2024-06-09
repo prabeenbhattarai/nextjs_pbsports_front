@@ -4,20 +4,22 @@ import LiveBox from "../LiveBox";
 import Center from "../Layout/Center";
 
 const ScheduleGridContainer = styled.div`
-  overflow-x: hidden;
-  position: relative;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  position: relative; /* Position relative for absolute positioning of scroll buttons */
 `;
 
 const ScheduleGrid = styled.div`
   display: flex;
   gap: 20px;
-  margin-top: 10px;
+  margin-top: 10px; /* Set scroll behavior for smooth scrolling */
   scroll-behavior: smooth;
-  overflow-x: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  /* Ensure the grid can be scrolled horizontally */
+  overflow-x: auto;
+  /* Hide the scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
   &::-webkit-scrollbar {
-    display: none;
+    display: none; /* WebKit */
   }
 `;
 
@@ -25,8 +27,8 @@ const SectionTitle = styled.h3`
   color: #d60202;
   margin-right: 20px;
   margin-bottom: 0;
-  font-size: 1.1rem;
-  display: ${({ hide }) => (hide ? "none" : "block")};
+  font-size: 1.1rem; /* Add margin to separate LiveNow from ScheduleGrid */
+  display: ${({ hide }) => (hide ? "none" : "block")}; /* Hide the title if there's no content */
 `;
 
 const ScrollButton = styled.button`
@@ -34,27 +36,37 @@ const ScrollButton = styled.button`
   border: none;
   cursor: pointer;
   position: absolute;
-  top: calc(50% - 24px);
+  top: calc(50% - 24px); /* Adjust position to be centered relative to the image */
   transform: translateY(-50%);
-  z-index: 1;
-  width: 48px;
+  z-index: 1; /* Ensure the buttons are above the content */
+  width: 48px; /* Adjust width and height of the buttons */
   height: 48px;
-  display: flex;
+  display: ${({ hide }) => (hide ? 'none' : 'flex')}; /* Hide the button if not needed */
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
-  ${({ hide }) => hide && "display: none;"}
+  /* Use border-radius to create a square shape */
+  border-radius: 10px; 
 `;
 
 const LeftScrollButton = styled(ScrollButton)`
   left: 0;
-  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
 `;
 
 const RightScrollButton = styled(ScrollButton)`
   right: 0;
-  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
 `;
+
+const ScrollIcon = styled.svg`
+  width: 24px;
+  height: 24px;
+  fill: white;
+`;
+
+const LeftScrollIcon = styled(ScrollIcon)`
+  transform: rotate(0deg); /* Rotate the right-facing arrow icon to face left */
+`;
+
+const RightScrollIcon = styled(ScrollIcon)``;
 
 const Tag = styled.div`
   position: absolute;
@@ -71,10 +83,6 @@ const Tag = styled.div`
 const Live = ({ schedule }) => {
   const liveScrollRef = useRef(null);
   const recentlyScheduledScrollRef = useRef(null);
-  const [showLiveLeftScroll, setShowLiveLeftScroll] = useState(false);
-  const [showLiveRightScroll, setShowLiveRightScroll] = useState(false);
-  const [showRecentlyScheduledLeftScroll, setShowRecentlyScheduledLeftScroll] = useState(false);
-  const [showRecentlyScheduledRightScroll, setShowRecentlyScheduledRightScroll] = useState(false);
   const [liveItems, setLiveItems] = useState([]);
   const [recentlyScheduledItems, setRecentlyScheduledItems] = useState([]);
 
@@ -99,13 +107,9 @@ const Live = ({ schedule }) => {
 
     if (liveScrollRef.current) {
       liveScrollRef.current.scrollLeft = 0;
-      setShowLiveLeftScroll(false);
-      setShowLiveRightScroll(live.length > 6);
     }
     if (recentlyScheduledScrollRef.current) {
       recentlyScheduledScrollRef.current.scrollLeft = 0;
-      setShowRecentlyScheduledLeftScroll(false);
-      setShowRecentlyScheduledRightScroll(recentlyScheduled.length > 6);
     }
   }, [schedule]);
 
@@ -114,9 +118,6 @@ const Live = ({ schedule }) => {
       left: scrollOffset,
       behavior: 'smooth',
     });
-
-    setShowLiveLeftScroll(liveScrollRef.current.scrollLeft + scrollOffset > 0);
-    setShowLiveRightScroll(liveScrollRef.current.scrollWidth > liveScrollRef.current.scrollLeft + scrollOffset + liveScrollRef.current.clientWidth);
   };
 
   const handleRecentlyScheduledScroll = (scrollOffset) => {
@@ -124,9 +125,6 @@ const Live = ({ schedule }) => {
       left: scrollOffset,
       behavior: 'smooth',
     });
-
-    setShowRecentlyScheduledLeftScroll(recentlyScheduledScrollRef.current.scrollLeft + scrollOffset > 0);
-    setShowRecentlyScheduledRightScroll(recentlyScheduledScrollRef.current.scrollWidth > recentlyScheduledScrollRef.current.scrollLeft + scrollOffset + recentlyScheduledScrollRef.current.clientWidth);
   };
 
   return (
@@ -136,19 +134,11 @@ const Live = ({ schedule }) => {
           <SectionTitle>Cricket Buzz Alert</SectionTitle>
           <ScheduleGridContainer>
             {liveItems.length > 6 && (
-              <>
-                <LeftScrollButton show={showLiveLeftScroll} onClick={() => handleLiveScroll(-300)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
-                    <path d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M18 12l-4-4v3H6v2h8v3z"/>
-                  </svg>
-                </LeftScrollButton>
-                <RightScrollButton show={showLiveRightScroll} onClick={() => handleLiveScroll(300)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
-                    <path d="M6 12l4 4v-3h8v-2H10V8z"/>
-                  </svg>
-                </RightScrollButton>
-              </>
+              <LeftScrollButton hide={liveScrollRef.current?.scrollLeft === 0} onClick={() => handleLiveScroll(-300)}>
+                <LeftScrollIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M8 5v14l-7-7 7-7zm8 0v14l-7-7 7-7z"/>
+                </LeftScrollIcon>
+              </LeftScrollButton>
             )}
             <ScheduleGrid ref={liveScrollRef}>
               {liveItems.map((item) => {
@@ -160,6 +150,13 @@ const Live = ({ schedule }) => {
                 );
               })}
             </ScheduleGrid>
+            {liveItems.length > 6 && (
+              <RightScrollButton hide={liveScrollRef.current?.scrollLeft === (liveScrollRef.current?.scrollWidth - liveScrollRef.current?.clientWidth)} onClick={() => handleLiveScroll(300)}>
+                <RightScrollIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M16 5v14l7-7-7-7zm-8 0v14l7-7-7-7z"/>
+                </RightScrollIcon>
+              </RightScrollButton>
+            )}
           </ScheduleGridContainer>
         </>
       )}
@@ -169,25 +166,24 @@ const Live = ({ schedule }) => {
           <SectionTitle>Upcoming Cricket Events</SectionTitle>
           <ScheduleGridContainer>
             {recentlyScheduledItems.length > 6 && (
-              <>
-                <LeftScrollButton show={showRecentlyScheduledLeftScroll} onClick={() => handleRecentlyScheduledScroll(-300)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
-                    <path d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M18 12l-4-4v3H6v2h8v3z"/>
-                  </svg>
-                </LeftScrollButton>
-                <RightScrollButton show={showRecentlyScheduledRightScroll} onClick={() => handleRecentlyScheduledScroll(300)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">
-                    <path d="M6 12l4 4v-3h8v-2H10V8z"/>
-                  </svg>
-                </RightScrollButton>
-              </>
+              <LeftScrollButton hide={recentlyScheduledScrollRef.current?.scrollLeft === 0} onClick={() => handleRecentlyScheduledScroll(-300)}>
+                <LeftScrollIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M8 5v14l-7-7 7-7zm8 0v14l-7-7 7-7z"/>
+                </LeftScrollIcon>
+              </LeftScrollButton>
             )}
             <ScheduleGrid ref={recentlyScheduledScrollRef}>
               {recentlyScheduledItems.map((item) => (
                 <LiveBox key={item._id} {...item} showScheduledTimeTag={true} />
               ))}
             </ScheduleGrid>
+            {recentlyScheduledItems.length > 6 && (
+              <RightScrollButton hide={recentlyScheduledScrollRef.current?.scrollLeft === (recentlyScheduledScrollRef.current?.scrollWidth - recentlyScheduledScrollRef.current?.clientWidth)} onClick={() => handleRecentlyScheduledScroll(300)}>
+                <RightScrollIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M16 5v14l7-7-7-7zm-8 0v14l7-7-7-7z"/>
+                </RightScrollIcon>
+              </RightScrollButton>
+            )}
           </ScheduleGridContainer>
         </>
       )}
