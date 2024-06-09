@@ -1,4 +1,4 @@
-"import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { styled } from "styled-components";
 import LiveBox from "../LiveBox";
 import Center from "../Layout/Center";
