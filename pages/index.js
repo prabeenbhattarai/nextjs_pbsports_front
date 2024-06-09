@@ -17,7 +17,7 @@ import NationalLive from "@/components/Live/NationalGames/NationalLive";
 
 
 
-export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight}) {
+export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national}) {
  
    return(
 
@@ -29,6 +29,7 @@ export default function HomePage({featuredSchedule,liveSchedule,crickethighlight
 <CricketHighlights crickethighlight ={crickethighlight}/>
       <FootballHighlights footballhighlight={footballhighlight} />
       <UfcHighlights ufchighlight ={ufchighlight} />
+    <NationalLive national={national}/>
 
       <Footer />
     </div>
@@ -90,7 +91,14 @@ const ufchighlight = await Highlight.find({
 })
 .sort({ '_id': -1 })
 .limit(10);
-
+const national = await Highlight.find({
+  $or: [
+    { categories: nationalCategory._id }, // Match documents with category 'Cricket'
+    { 'categories.parent': nationalCategory._id } // Match documents with subcategory 'Cricket'
+  ]
+})
+.sort({ '_id': -1 })
+.limit(10);
 
   return {
     props: 
@@ -100,6 +108,8 @@ const ufchighlight = await Highlight.find({
       footballSchedule: JSON.parse(JSON.stringify(footballSchedule)),
       footballhighlight: JSON.parse(JSON.stringify(footballhighlight)),
       ufchighlight: JSON.parse(JSON.stringify(ufchighlight)),
+           national: JSON.parse(JSON.stringify(national)),
+
 
 
       crickethighlight: JSON.parse(JSON.stringify(crickethighlight))},
