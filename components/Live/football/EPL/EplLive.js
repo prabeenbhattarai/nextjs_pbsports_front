@@ -144,7 +144,7 @@ const EplLive = ({ epl }) => {
   return (
     <Center>
       <>
-        <SectionTitle hide={liveItems.length === 0}>Copa America Alert</SectionTitle>
+        <SectionTitle hide={liveItems.length === 0}>EPL Alert</SectionTitle>
         <ScheduleGridContainer>
           {liveItems.length > 6 && (
             <>
@@ -172,7 +172,7 @@ const EplLive = ({ epl }) => {
           </ScheduleGrid>
         </ScheduleGridContainer>
 
-        <SectionTitle hide={recentlyScheduledItems.length === 0}>Copa America Events</SectionTitle>
+        <SectionTitle hide={recentlyScheduledItems.length === 0}>EPL Football Events</SectionTitle>
         <ScheduleGridContainer>
           {recentlyScheduledItems.length > 6 && (
             <>
