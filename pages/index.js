@@ -23,13 +23,13 @@ export default function HomePage({featuredSchedule,liveSchedule,crickethighlight
 
     <div> 
       <Header />
-      <Featured  schedule={featuredSchedule}/>
-      <Live schedule={liveSchedule} />
-      <FootballLive football={footballSchedule}/>
-<CricketHighlights crickethighlight ={crickethighlight}/>
-      <FootballHighlights footballhighlight={footballhighlight} />
-      <UfcHighlights ufchighlight ={ufchighlight} />
-    <NationalLive national={national}/>
+      <Featured  schedule={featuredSchedule}/> // Featured Title in Banner
+      <Live schedule={liveSchedule} /> // Cricket upcomg schedule
+      <FootballLive football={footballSchedule}/> // football upcoming events
+        <NationalLive national={national}/> // national upcoming events
+<CricketHighlights crickethighlight ={crickethighlight}/> //Cricket Highlight
+      <FootballHighlights footballhighlight={footballhighlight} /> // Football Highlights
+      <UfcHighlights ufchighlight ={ufchighlight} /> // UFC Highlights
 
       <Footer />
     </div>
@@ -91,7 +91,7 @@ const ufchighlight = await Highlight.find({
 })
 .sort({ '_id': -1 })
 .limit(10);
-const national = await Highlight.find({
+const national = await Schedule.find({
   $or: [
     { categories: nationalCategory._id }, // Match documents with category 'Cricket'
     { 'categories.parent': nationalCategory._id } // Match documents with subcategory 'Cricket'
