@@ -80,7 +80,7 @@ export default function LiveBox({ _id, title, description, url, time, images, sh
     return null; // Do not render the component if required properties are missing
   }
 
-  const link = 'Games/schedule/cricket/' + title + description;
+  const link = 'Games/schedule/cricket/' + _id;
 
   return (
     <Link href={link} passHref>
