@@ -164,6 +164,9 @@ export default function Header() {
         <meta name="twitter:image" content="https://www.pbsports.net/logo.png" />
         <meta name="author" content="PBsports" />
         <link rel="alternate" href="https://www.pbsports.net/" hreflang="es" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <meta charset="UTF-8" />
       </Head>
     
