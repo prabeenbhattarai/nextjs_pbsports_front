@@ -147,7 +147,7 @@ const VideoFrameWrapper = styled.div`
 
 `;
 
-export default function SchedulePage({ schedule,footballSchedule}) {
+export default function SchedulePage({ schedule,epl}) {
   const { data: session } = useSession();
  
 
@@ -250,11 +250,11 @@ export async function getServerSideProps(context) {
   await mongooseConnect();
   const { id } = context.query;
   const schedule = await Schedule.findById(id);
-  const footballSchedule = await Schedule.find({}, null, {sort: {'_id':-1}, limit:10});
+  const epl = await Schedule.find({}, null, {sort: {'_id':-1}, limit:10});
   return {
     props: {
       schedule: JSON.parse(JSON.stringify(schedule)),
-      liveSchedule: JSON.parse(JSON.stringify(footballSchedule))},
+      epl: JSON.parse(JSON.stringify(epl))},
 
     }
   };
