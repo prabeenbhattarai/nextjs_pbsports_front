@@ -15,15 +15,13 @@ import UfcHighlights from "@/components/Highlight/Ufchighlights";
 import CricketHighlights from "@/components/Highlight/CricketHighlights";
 import NationalLive from "@/components/Live/NationalGames/NationalLive";
 import FormulaLive from "@/components/Live/Formula1/FormulaLive";
-import CopaLive from "@/components/Live/football/CopaAmerica/CopaLive";
-import EplLive from "@/components/Live/football/EPL/EplLive";
 
 
 
 
 
 
-export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national,formula,epl,copa}) {
+export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national,formula}) {
  
    return(
 
@@ -32,8 +30,7 @@ export default function HomePage({featuredSchedule,liveSchedule,crickethighlight
       <Featured  schedule={featuredSchedule}/> 
       <Live schedule={liveSchedule} />
       <FootballLive football={footballSchedule}/> 
-          <CopaLive copa={copa}/> 
-    <EplLive epl={epl}/>
+        
 
         <NationalLive national={national}/> 
             <FormulaLive formula={formula}/> 
@@ -56,9 +53,7 @@ export async function getServerSideProps(){
   const ufcCategory = await Category.findOne({ name: 'UFC' });
    const nationalCategory = await Category.findOne({ name: 'NationalGames' });
     const formulaCategory = await Category.findOne({ name: 'Formula1' });
-     const copaCategory = await Category.findOne({ name: 'Copa America' });
-     const EplCategory = await Category.findOne({ name: 'English Premier League' });
-
+    
 
 
 
@@ -124,22 +119,7 @@ const national = await Schedule.find({
 })
 .sort({ '_id': -1 })
 .limit(10);
-const copa = await Schedule.find({
-  $or: [
-    { categories: copaCategory._id }, // Match documents with category 'Cricket'
-    { 'categories.parent': copaCategory._id } // Match documents with subcategory 'Cricket'
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
-const epl = await Schedule.find({
-  $or: [
-    { categories: EplCategory._id }, // Match documents with category 'Cricket'
-    { 'categories.parent': EplCategory._id } // Match documents with subcategory 'Cricket'
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
+
 
   return {
     props: 
@@ -151,14 +131,7 @@ const epl = await Schedule.find({
       ufchighlight: JSON.parse(JSON.stringify(ufchighlight)),
            national: JSON.parse(JSON.stringify(national)),
                 formula: JSON.parse(JSON.stringify(formula)),
-                     copa: JSON.parse(JSON.stringify(copa)),
-                     epl: JSON.parse(JSON.stringify(epl)),
-
-
-
-
-
-
+                    
       crickethighlight: JSON.parse(JSON.stringify(crickethighlight))},
 
 
