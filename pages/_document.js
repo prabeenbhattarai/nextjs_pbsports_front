@@ -6,6 +6,8 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+                <link rel="icon" href="/PB.png" />
+
           <script src="https://accounts.google.com/gsi/client" async defer></script>
         </Head>
         <body>
