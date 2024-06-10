@@ -17,6 +17,7 @@ import NationalLive from "@/components/Live/NationalGames/NationalLive";
 import FormulaLive from "@/components/Live/Formula1/FormulaLive";
 import CopaLive from "@/components/Live/football/CopaAmerica/CopaLive";
 import EplLive from "@/components/Live/football/EPL/EplLive";
+import UefaLive from "@/components/Live/football/UEFA/UefaLive";
 
 
 
@@ -24,7 +25,8 @@ import EplLive from "@/components/Live/football/EPL/EplLive";
 
 
 
-export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national,formula,copa,epl}) {
+
+export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national,formula,copa,epl,uefa}) {
  
    return(
 
@@ -35,6 +37,7 @@ export default function HomePage({featuredSchedule,liveSchedule,crickethighlight
       <FootballLive football={footballSchedule}/> 
    <CopaLive copa={copa}/>
    <EplLive epl={epl}/>
+    <UefaLive uefa={uefa}/>
      <NationalLive national={national}/> 
    <FormulaLive formula={formula}/> 
 
@@ -58,6 +61,8 @@ export async function getServerSideProps(){
     const formulaCategory = await Category.findOne({ name: 'Formula1' });
      const copaCategory = await Category.findOne({ name: 'CopaAmerica' });
      const eplCategory = await Category.findOne({ name: 'English_Premier_League' });
+      const uefaCategory = await Category.findOne({ name: 'UEFA_Champions_League' });
+
 
 
     
@@ -134,6 +139,14 @@ const epl = await Schedule.find({
 })
 .sort({ '_id': -1 })
 .limit(10);
+ const uefa = await Schedule.find({
+  $or: [
+    { categories: uefaCategory._id }, // Match documents with category 'national'
+    { 'categories.parent': uefaCategory._id } 
+  ]
+})
+.sort({ '_id': -1 })
+.limit(10);
  const formula = await Schedule.find({
   $or: [
     { categories: formulaCategory._id }, // Match documents with category 'formula1'
@@ -155,6 +168,8 @@ const epl = await Schedule.find({
                 formula: JSON.parse(JSON.stringify(formula)),
                 copa: JSON.parse(JSON.stringify(copa)),
                 epl: JSON.parse(JSON.stringify(epl)),
+                     uefa: JSON.parse(JSON.stringify(uefa)),
+
      
                     
       crickethighlight: JSON.parse(JSON.stringify(crickethighlight))},
