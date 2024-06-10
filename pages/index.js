@@ -25,38 +25,43 @@ import IccTestLive from "@/components/Live/cricket/ICC_Test/IccTestLive";
 import AsiaLive from "@/components/Live/cricket/Asia_Cup/AsiaLive";
 import IccT20Live from "@/components/Live/cricket/ICC_T20/IccT20Live";
 
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '16px', // Adjust gap between components
-  },
-};
+
+
+
+
+
+
+
+
+
 
 
 export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national,formula,copa,epl,uefa,euro,fifa,iccwc,icctest,asiacup,icct20}) {
  
    return(
 
-   <div style={styles.container}>
+    <div> 
       <Header />
-      <Featured schedule={props.featuredSchedule} />
-      {props.liveSchedule.length > 0 && <Live schedule={props.liveSchedule} />}
-      {props.icct20.length > 0 && <IccT20Live icct20={props.icct20} />}
-      {props.asiacup.length > 0 && <AsiaLive asiacup={props.asiacup} />}
-      {props.iccwc.length > 0 && <IccLive iccwc={props.iccwc} />}
-      {props.icctest.length > 0 && <IccTestLive icctest={props.icctest} />}
-      {props.footballSchedule.length > 0 && <FootballLive football={props.footballSchedule} />}
-      {props.fifa.length > 0 && <FifaLive fifa={props.fifa} />}
-      {props.copa.length > 0 && <CopaLive copa={props.copa} />}
-      {props.euro.length > 0 && <EuroLive euro={props.euro} />}
-      {props.epl.length > 0 && <EplLive epl={props.epl} />}
-      {props.uefa.length > 0 && <UefaLive uefa={props.uefa} />}
-      {props.national.length > 0 && <NationalLive national={props.national} />}
-      {props.formula.length > 0 && <FormulaLive formula={props.formula} />}
-      {props.crickethighlight.length > 0 && <CricketHighlights crickethighlight={props.crickethighlight} />}
-      {props.footballhighlight.length > 0 && <FootballHighlights footballhighlight={props.footballhighlight} />}
-      {props.ufchighlight.length > 0 && <UfcHighlights ufchighlight={props.ufchighlight} />}
+      <Featured  schedule={featuredSchedule}/> 
+      <Live schedule={liveSchedule} />
+    <IccT20Live icct20={icct20}/>
+  
+    <AsiaLive asiacup={asiacup}/>
+      <IccLive iccwc={iccwc}/>
+    <IccTestLive icctest={icctest}/>
+      <FootballLive football={footballSchedule}/> 
+    <FifaLive fifa={fifa}/>
+   <CopaLive copa={copa}/>
+    <EuroLive euro={euro}/>
+   <EplLive epl={epl}/>
+    <UefaLive uefa={uefa}/>
+     <NationalLive national={national}/> 
+   <FormulaLive formula={formula}/> 
+
+<CricketHighlights crickethighlight ={crickethighlight}/> 
+      <FootballHighlights footballhighlight={footballhighlight} />
+      <UfcHighlights ufchighlight ={ufchighlight} />
+
       <Footer />
     </div>
   );
