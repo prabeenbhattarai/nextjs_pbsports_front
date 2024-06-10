@@ -82,7 +82,7 @@ export default function FifaBox({ _id, title, description, url, time, images, sh
     return null; // Do not render the component if required properties are missing
   }
 
-  const link = '/Games/schedule/football/FIFA_WorldCup/' + _id;
+  const link = '/Games/schedule/football/FIFA_Worldcup/' + _id;
 
   return (
     <Link href={link} passHref>
