@@ -187,8 +187,11 @@ export default function Header() {
             <NavLink href={"/Football"} scrolled={scrolled}>
               Football
             </NavLink>
-            <NavLink href={"/support"} scrolled={scrolled}>
-              Support & FAQs
+            <NavLink href={"/formula1"} scrolled={scrolled}>
+             Formula1
+            </NavLink>
+    <NavLink href={"/ufc"} scrolled={scrolled}>
+             ufc
             </NavLink>
             {session ? (
               <NavLink href="/user/Auth/login">
