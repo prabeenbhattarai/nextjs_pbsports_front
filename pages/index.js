@@ -22,6 +22,7 @@ import FifaLive from "@/components/Live/football/Fifa/FifaLive";
 import IccLive from "@/components/Live/cricket/ICC_WC/IccLive";
 import IccTestLive from "@/components/Live/cricket/ICC_Test/IccTestLive";
 import AsiaLive from "@/components/Live/cricket/Asia_Cup/AsiaLive";
+import IccT20Live from "@/components/Live/cricket/ICC_T20/IccT20Live";
 
 
 
@@ -33,7 +34,8 @@ import AsiaLive from "@/components/Live/cricket/Asia_Cup/AsiaLive";
 
 
 
-export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national,formula,copa,epl,uefa,fifa,iccwc,icctest,asiacup}) {
+
+export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national,formula,copa,epl,uefa,fifa,iccwc,icctest,asiacup,icct20}) {
  
    return(
 
@@ -41,6 +43,7 @@ export default function HomePage({featuredSchedule,liveSchedule,crickethighlight
       <Header />
       <Featured  schedule={featuredSchedule}/> 
       <Live schedule={liveSchedule} />
+    <IccT20Live icct20={icct20}/>
     <IccLive iccwc={iccwc}/>
     <IccTestLive icctest={icctest}/>
     <AsiaLive asiacup={asiacup}/>
@@ -77,6 +80,8 @@ export async function getServerSideProps(){
         const iccwcCategory = await Category.findOne({ name: 'ICC_Cricket_Worldcup' });
          const icctestCategory = await Category.findOne({ name: 'ICC_World_Test_Championship' });
           const asiacupCategory = await Category.findOne({ name: 'Asia_Cup' });
+           const icct20Category = await Category.findOne({ name: 'ICC_T20_Worldcup' });
+
 
 
 
@@ -198,6 +203,14 @@ const epl = await Schedule.find({
 })
 .sort({ '_id': -1 })
 .limit(10);
+  const icct20 = await Schedule.find({
+  $or: [
+    { categories: icct20Category._id }, // Match documents with category 'ICC T20 WorldCup'
+    { 'categories.parent': icct20Category._id } 
+  ]
+})
+.sort({ '_id': -1 })
+.limit(10);
  const formula = await Schedule.find({
   $or: [
     { categories: formulaCategory._id }, // Match documents with category 'formula1'
@@ -224,6 +237,7 @@ const epl = await Schedule.find({
        iccwc: JSON.parse(JSON.stringify(iccwc)),
      icctest: JSON.parse(JSON.stringify(icctest)),
       asiacup: JSON.parse(JSON.stringify(asiacup)),
+      icct20: JSON.parse(JSON.stringify(icct20)),
 
 
 
