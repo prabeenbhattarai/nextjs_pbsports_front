@@ -193,6 +193,15 @@ export default function Header() {
     <NavLink href={"/ufc"} scrolled={scrolled}>
              ufc
             </NavLink>
+   <NavLink href={"blog.pbsports.net"} scrolled={scrolled}>
+            blog
+            </NavLink>
+   <NavLink href={"/dmca"} scrolled={scrolled}>
+             dmca
+            </NavLink>
+   <NavLink href={"/dmca"} scrolled={scrolled}>
+             more games
+            </NavLink>
             {session ? (
               <NavLink href="/user/Auth/login">
                 <UserPhoto src={session?.user?.image} alt="Pbsports" />
