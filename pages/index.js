@@ -78,8 +78,8 @@ const liveSchedule = await Schedule.find({
 .limit(10);
 const footballSchedule = await Schedule.find({
   $or: [
-    { categories: footballCategory._id }, // Match documents with category 'Cricket'
-    { 'categories.parent': footballCategory._id } // Match documents with subcategory 'Cricket'
+    { categories: footballCategory._id }, // Match documents with category 'football'
+    { 'categories.parent': footballCategory._id }
   ]
 })
 .sort({ '_id': -1 })
@@ -112,16 +112,16 @@ const ufchighlight = await Highlight.find({
 .limit(10);
 const national = await Schedule.find({
   $or: [
-    { categories: nationalCategory._id }, // Match documents with category 'Cricket'
-    { 'categories.parent': nationalCategory._id } // Match documents with subcategory 'Cricket'
+    { categories: nationalCategory._id }, // Match documents with category 'national'
+    { 'categories.parent': nationalCategory._id } 
   ]
 })
 .sort({ '_id': -1 })
 .limit(10);
  const formula = await Schedule.find({
   $or: [
-    { categories: formulaCategory._id }, // Match documents with category 'Cricket'
-    { 'categories.parent': formulaCategory._id } // Match documents with subcategory 'Cricket'
+    { categories: formulaCategory._id }, // Match documents with category 'formula1'
+    { 'categories.parent': formulaCategory._id } 
   ]
 })
 .sort({ '_id': -1 })
