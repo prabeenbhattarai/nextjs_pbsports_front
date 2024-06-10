@@ -85,7 +85,7 @@ const CopaLive = ({ copa }) => {
     const live = [];
     const recentlyScheduled = [];
 
-    national.forEach(item => {
+    copa.forEach(item => {
       const scheduledTime = new Date(item.time);
 
       if (scheduledTime <= now && scheduledTime >= new Date(now.getTime() - 3 * 60 * 60 * 1000)) {
