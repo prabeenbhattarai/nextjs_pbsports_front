@@ -45,9 +45,10 @@ export default function HomePage({featuredSchedule,liveSchedule,crickethighlight
       <Featured  schedule={featuredSchedule}/> 
       <Live schedule={liveSchedule} />
     <IccT20Live icct20={icct20}/>
-    <IccLive iccwc={iccwc}/>
-    <IccTestLive icctest={icctest}/>
+  
     <AsiaLive asiacup={asiacup}/>
+      <IccLive iccwc={iccwc}/>
+    <IccTestLive icctest={icctest}/>
       <FootballLive football={footballSchedule}/> 
     <FifaLive fifa={fifa}/>
    <CopaLive copa={copa}/>
