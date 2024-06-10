@@ -21,7 +21,7 @@ import UefaLive from "@/components/Live/football/UEFA/UefaLive";
 import FifaLive from "@/components/Live/football/Fifa/FifaLive";
 import IccLive from "@/components/Live/cricket/ICC_WC/IccLive";
 import IccTestLive from "@/components/Live/cricket/ICC_Test/IccTestLive";
-import IccTestLive from "@/components/Live/cricket/Asia_Cup/AsiaLive";
+import AsiaLive from "@/components/Live/cricket/Asia_Cup/AsiaLive";
 
 
 
