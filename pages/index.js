@@ -28,7 +28,7 @@ const styles = {
   container: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '16px', // Adjust gap between components
+    gap: '10px', // Adjust gap between components
   },
 };
 
