@@ -85,7 +85,7 @@ const IccLive = ({ iccwc }) => {
     const live = [];
     const recentlyScheduled = [];
 
-    copa.forEach(item => {
+    iccwc.forEach(item => {
       const scheduledTime = new Date(item.time);
 
       if (scheduledTime <= now && scheduledTime >= new Date(now.getTime() - 3 * 60 * 60 * 1000)) {
