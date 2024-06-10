@@ -14,22 +14,7 @@ export const  authOptions =
    
  
   ],
-  session: {
-    // Use server-side sessions
-    jwt: false,
-    // Set the session duration (in seconds)
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-    updateAge: 24 * 60 * 60, // Update the session every 24 hours
-  },
-  callbacks: {
-    async session(session, user) {
-      // Optionally, you can attach additional information to the session here
-      session.user = user
-      return session
-    },
-  },
-  // Use database sessions
-  database: process.env.MONGODB_URI,
+  
 }
 
 
