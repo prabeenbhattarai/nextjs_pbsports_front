@@ -81,7 +81,7 @@ export default function IccBox({ _id, title, description, url, time, images, sho
     return null; // Do not render the component if required properties are missing
   }
 
-  const link = '/Games/schedule/Cricket/ICC_Cricket_Worldcup/' + _id;
+  const link = '/Games/schedule/cricket/ICC_Cricket_Worldcup/' + _id;
 
   return (
     <Link href={link} passHref>
