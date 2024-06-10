@@ -93,7 +93,7 @@ const ContentWrapper = styled.div`
 
 export default function Featured({ schedule }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = [ "/image3.png", "/image8.jpg"];
+  const images = [ "/image3.png", "/image8.jpg", "/image9.png"];
 
   useEffect(() => {
     const interval = setInterval(() => {
