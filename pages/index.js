@@ -56,8 +56,8 @@ export async function getServerSideProps(){
   const ufcCategory = await Category.findOne({ name: 'UFC' });
    const nationalCategory = await Category.findOne({ name: 'NationalGames' });
     const formulaCategory = await Category.findOne({ name: 'Formula1' });
-     const copaCategory = await Category.findOne({ name: 'Copa America' });
-     const eplCategory = await Category.findOne({ name: 'English Premier League' });
+     const copaCategory = await Category.findOne({ name: 'CopaAmerica' });
+     const eplCategory = await Category.findOne({ name: 'English_Premier_League' });
 
 
     
