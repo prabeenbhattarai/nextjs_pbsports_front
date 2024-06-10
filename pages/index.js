@@ -18,6 +18,7 @@ import FormulaLive from "@/components/Live/Formula1/FormulaLive";
 import CopaLive from "@/components/Live/football/CopaAmerica/CopaLive";
 import EplLive from "@/components/Live/football/EPL/EplLive";
 import UefaLive from "@/components/Live/football/UEFA/UefaLive";
+import FifaLive from "@/components/Live/football/Fifa/FifaLive";
 
 
 
@@ -26,7 +27,8 @@ import UefaLive from "@/components/Live/football/UEFA/UefaLive";
 
 
 
-export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national,formula,copa,epl,uefa}) {
+
+export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national,formula,copa,epl,uefa,fifa}) {
  
    return(
 
@@ -35,6 +37,7 @@ export default function HomePage({featuredSchedule,liveSchedule,crickethighlight
       <Featured  schedule={featuredSchedule}/> 
       <Live schedule={liveSchedule} />
       <FootballLive football={footballSchedule}/> 
+    <FifaLive fifa={fifa}/>
    <CopaLive copa={copa}/>
    <EplLive epl={epl}/>
     <UefaLive uefa={uefa}/>
@@ -62,6 +65,8 @@ export async function getServerSideProps(){
      const copaCategory = await Category.findOne({ name: 'CopaAmerica' });
      const eplCategory = await Category.findOne({ name: 'English_Premier_League' });
       const uefaCategory = await Category.findOne({ name: 'UEFA_Champions_League' });
+       const fifaCategory = await Category.findOne({ name: 'FIFA_Worldcup' });
+
 
 
 
@@ -125,7 +130,7 @@ const national = await Schedule.find({
 .limit(10);
 const copa = await Schedule.find({
   $or: [
-    { categories: copaCategory._id }, // Match documents with category 'national'
+    { categories: copaCategory._id }, // Match documents with category 'copa'
     { 'categories.parent': copaCategory._id } 
   ]
 })
@@ -133,7 +138,7 @@ const copa = await Schedule.find({
 .limit(10);
 const epl = await Schedule.find({
   $or: [
-    { categories: eplCategory._id }, // Match documents with category 'national'
+    { categories: eplCategory._id }, // Match documents with category 'epl'
     { 'categories.parent': eplCategory._id } 
   ]
 })
@@ -141,8 +146,16 @@ const epl = await Schedule.find({
 .limit(10);
  const uefa = await Schedule.find({
   $or: [
-    { categories: uefaCategory._id }, // Match documents with category 'national'
+    { categories: uefaCategory._id }, // Match documents with category 'uefa'
     { 'categories.parent': uefaCategory._id } 
+  ]
+})
+.sort({ '_id': -1 })
+.limit(10);
+  const fifa = await Schedule.find({
+  $or: [
+    { categories: fifaCategory._id }, // Match documents with category 'fifa'
+    { 'categories.parent': fifaCategory._id } 
   ]
 })
 .sort({ '_id': -1 })
@@ -164,11 +177,13 @@ const epl = await Schedule.find({
       footballSchedule: JSON.parse(JSON.stringify(footballSchedule)),
       footballhighlight: JSON.parse(JSON.stringify(footballhighlight)),
       ufchighlight: JSON.parse(JSON.stringify(ufchighlight)),
-           national: JSON.parse(JSON.stringify(national)),
-                formula: JSON.parse(JSON.stringify(formula)),
-                copa: JSON.parse(JSON.stringify(copa)),
-                epl: JSON.parse(JSON.stringify(epl)),
-                     uefa: JSON.parse(JSON.stringify(uefa)),
+       national: JSON.parse(JSON.stringify(national)),
+      formula: JSON.parse(JSON.stringify(formula)),
+      copa: JSON.parse(JSON.stringify(copa)),
+       epl: JSON.parse(JSON.stringify(epl)),
+        uefa: JSON.parse(JSON.stringify(uefa)),
+       fifa: JSON.parse(JSON.stringify(fifa)),
+
 
      
                     
