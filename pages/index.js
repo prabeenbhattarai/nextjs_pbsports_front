@@ -15,16 +15,13 @@ import UfcHighlights from "@/components/Highlight/Ufchighlights";
 import CricketHighlights from "@/components/Highlight/CricketHighlights";
 import NationalLive from "@/components/Live/NationalGames/NationalLive";
 import FormulaLive from "@/components/Live/Formula1/FormulaLive";
-import CopaLive from "@/components/Live/football/CopaAmerica/CopaLive";
-import EplLive from "@/components/Live/football/EPL/EplLive";
 
 
 
 
 
 
-
-export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national,formula,copa,epl}) {
+export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national,formula}) {
  
    return(
 
@@ -33,8 +30,7 @@ export default function HomePage({featuredSchedule,liveSchedule,crickethighlight
       <Featured  schedule={featuredSchedule}/> 
       <Live schedule={liveSchedule} />
       <FootballLive football={footballSchedule}/> 
-    <CopaLive copa={copa}/>
-    <EplLive epl={epl}/>  
+   
      <NationalLive national={national}/> 
    <FormulaLive formula={formula}/> 
 
@@ -126,22 +122,7 @@ const national = await Schedule.find({
 })
 .sort({ '_id': -1 })
 .limit(10);
-const copa = await Schedule.find({
-  $or: [
-    { categories: copaCategory._id }, // Match documents with category 'Copa America'
-    { 'categories.parent': copaCategory._id } 
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
-const epl = await Schedule.find({
-  $or: [
-    { categories: eplCategory._id }, // Match documents with category 'EPL'
-    { 'categories.parent': eplCategory._id } 
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
+
   return {
     props: 
     {
@@ -152,8 +133,7 @@ const epl = await Schedule.find({
       ufchighlight: JSON.parse(JSON.stringify(ufchighlight)),
            national: JSON.parse(JSON.stringify(national)),
                 formula: JSON.parse(JSON.stringify(formula)),
-      copa: JSON.parse(JSON.stringify(copa)),
-      epl: JSON.parse(JSON.stringify(epl)),
+     
                     
       crickethighlight: JSON.parse(JSON.stringify(crickethighlight))},
 
