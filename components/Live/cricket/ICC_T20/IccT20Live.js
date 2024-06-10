@@ -69,7 +69,7 @@ const Tag = styled.div`
   font-weight: bold;
 `;
 
-const iCCT20Live = ({ icct20 }) => {
+const IccT20Live = ({ icct20 }) => {
   const liveScrollRef = useRef(null);
   const recentlyScheduledScrollRef = useRef(null);
   const [showLiveLeftScroll, setShowLiveLeftScroll] = useState(false);
