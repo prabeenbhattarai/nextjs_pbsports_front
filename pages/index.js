@@ -25,24 +25,22 @@ import IccTestLive from "@/components/Live/cricket/ICC_Test/IccTestLive";
 import AsiaLive from "@/components/Live/cricket/Asia_Cup/AsiaLive";
 import IccT20Live from "@/components/Live/cricket/ICC_T20/IccT20Live";
 
-
-
-
-
-
-
-
-
-
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px', // Adjust gap between components
+  },
+};
 
 
 export default function HomePage({featuredSchedule,liveSchedule,crickethighlight, footballSchedule, footballhighlight, ufchighlight,national,formula,copa,epl,uefa,euro,fifa,iccwc,icctest,asiacup,icct20}) {
  
    return(
 
-    <div> 
+    <div style={styles.container}>
       <Header />
-      <Featured  schedule={featuredSchedule}/> 
+      <Featured schedule={props.featuredSchedule} />
       <Live schedule={liveSchedule} />
     <IccT20Live icct20={icct20}/>
   
