@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { styled } from "styled-components";
 import LiveBox from "../../../LiveBox";
 import Center from "../../../Layout/Center";
-import IccBox from "./Iccbox";
+import IccBox from "./IccBox";
 
 const ScheduleGridContainer = styled.div`
   overflow-x: hidden;
