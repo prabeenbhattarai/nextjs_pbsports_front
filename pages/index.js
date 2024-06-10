@@ -112,171 +112,161 @@ export async function getServerSideProps() {
     icct20Category = await Category.findOne({ name: 'ICC_T20_Worldcup' });
     euroCategory = await Category.findOne({ name: 'Euro_Cup' });
 
+    const liveSchedule = await Schedule.find({
+      $or: [
+        { categories: cricketCategory._id },
+        { 'categories.parent': cricketCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
 
+    const footballSchedule = await Schedule.find({
+      $or: [
+        { categories: footballCategory._id },
+        { 'categories.parent': footballCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
 
-// Use the ObjectId in your query
-const liveSchedule = await Schedule.find({
-  $or: [
-    { categories: cricketCategory._id }, // Match documents with category 'Cricket'
-    { 'categories.parent': cricketCategory._id } // Match documents with subcategory 'Cricket'
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
-const footballSchedule = await Schedule.find({
-  $or: [
-    { categories: footballCategory._id }, // Match documents with category 'football'
-    { 'categories.parent': footballCategory._id }
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
+    const crickethighlight = await Highlight.find({
+      $or: [
+        { categories: cricketCategory._id },
+        { 'categories.parent': cricketCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
 
- // const liveSchedule = await Schedule.find({categories: 'Cricket'}, null, {sort: {'_id':-1}, limit:10});
- const crickethighlight = await Highlight.find({
-  $or: [
-    { categories: cricketCategory._id }, // Match documents with category 'Cricket'
-    { 'categories.parent': cricketCategory._id } // Match documents with subcategory 'Cricket'
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
-const footballhighlight = await Highlight.find({
-  $or: [
-    { categories: footballCategory._id }, // Match documents with category 'Cricket'
-    { 'categories.parent': footballCategory._id } // Match documents with subcategory 'Cricket'
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
-const ufchighlight = await Highlight.find({
-  $or: [
-    { categories: ufcCategory._id }, // Match documents with category 'Cricket'
-    { 'categories.parent': ufcCategory._id } // Match documents with subcategory 'Cricket'
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
-const national = await Schedule.find({
-  $or: [
-    { categories: nationalCategory._id }, // Match documents with category 'national'
-    { 'categories.parent': nationalCategory._id } 
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
-const copa = await Schedule.find({
-  $or: [
-    { categories: copaCategory._id }, // Match documents with category 'copa'
-    { 'categories.parent': copaCategory._id } 
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
- const euro = await Schedule.find({
-  $or: [
-    { categories: euroCategory._id }, // Match documents with category 'copa'
-    { 'categories.parent': euroCategory._id } 
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
-const epl = await Schedule.find({
-  $or: [
-    { categories: eplCategory._id }, // Match documents with category 'epl'
-    { 'categories.parent': eplCategory._id } 
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
- const uefa = await Schedule.find({
-  $or: [
-    { categories: uefaCategory._id }, // Match documents with category 'uefa'
-    { 'categories.parent': uefaCategory._id } 
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
-  const fifa = await Schedule.find({
-  $or: [
-    { categories: fifaCategory._id }, // Match documents with category 'fifa'
-    { 'categories.parent': fifaCategory._id } 
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
-  const iccwc = await Schedule.find({
-  $or: [
-    { categories: iccwcCategory._id }, // Match documents with category 'ICC Cricket Worldcup'
-    { 'categories.parent': iccwcCategory._id } 
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
-  const icctest = await Schedule.find({
-  $or: [
-    { categories: icctestCategory._id }, // Match documents with category 'ICC Cricket Worldcup'
-    { 'categories.parent': icctestCategory._id } 
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
-  const asiacup = await Schedule.find({
-  $or: [
-    { categories: asiacupCategory._id }, // Match documents with category 'Asia Cup'
-    { 'categories.parent': asiacupCategory._id } 
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
-  const icct20 = await Schedule.find({
-  $or: [
-    { categories: icct20Category._id }, // Match documents with category 'ICC T20 WorldCup'
-    { 'categories.parent': icct20Category._id } 
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
- const formula = await Schedule.find({
-  $or: [
-    { categories: formulaCategory._id }, // Match documents with category 'formula1'
-    { 'categories.parent': formulaCategory._id } 
-  ]
-})
-.sort({ '_id': -1 })
-.limit(10);
+    const footballhighlight = await Highlight.find({
+      $or: [
+        { categories: footballCategory._id },
+        { 'categories.parent': footballCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
 
-  return {
-    props: 
-    {
-      featuredSchedule: JSON.parse(JSON.stringify(featuredSchedule)),
-      liveSchedule: JSON.parse(JSON.stringify(liveSchedule)),
-      footballSchedule: JSON.parse(JSON.stringify(footballSchedule)),
-      footballhighlight: JSON.parse(JSON.stringify(footballhighlight)),
-      ufchighlight: JSON.parse(JSON.stringify(ufchighlight)),
-       national: JSON.parse(JSON.stringify(national)),
-      formula: JSON.parse(JSON.stringify(formula)),
-      copa: JSON.parse(JSON.stringify(copa)),
-       epl: JSON.parse(JSON.stringify(epl)),
+    const ufchighlight = await Highlight.find({
+      $or: [
+        { categories: ufcCategory._id },
+        { 'categories.parent': ufcCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
+
+    const national = await Schedule.find({
+      $or: [
+        { categories: nationalCategory._id },
+        { 'categories.parent': nationalCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
+
+    const copa = await Schedule.find({
+      $or: [
+        { categories: copaCategory._id },
+        { 'categories.parent': copaCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
+
+    const euro = await Schedule.find({
+      $or: [
+        { categories: euroCategory._id },
+        { 'categories.parent': euroCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
+
+    const epl = await Schedule.find({
+      $or: [
+        { categories: eplCategory._id },
+        { 'categories.parent': eplCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
+
+    const uefa = await Schedule.find({
+      $or: [
+        { categories: uefaCategory._id },
+        { 'categories.parent': uefaCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
+
+    const fifa = await Schedule.find({
+      $or: [
+        { categories: fifaCategory._id },
+        { 'categories.parent': fifaCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
+
+    const iccwc = await Schedule.find({
+      $or: [
+        { categories: iccwcCategory._id },
+        { 'categories.parent': iccwcCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
+
+    const icctest = await Schedule.find({
+      $or: [
+        { categories: icctestCategory._id },
+        { 'categories.parent': icctestCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
+
+    const asiacup = await Schedule.find({
+      $or: [
+        { categories: asiacupCategory._id },
+        { 'categories.parent': asiacupCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
+
+    const icct20 = await Schedule.find({
+      $or: [
+        { categories: icct20Category._id },
+        { 'categories.parent': icct20Category._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
+
+    const formula = await Schedule.find({
+      $or: [
+        { categories: formulaCategory._id },
+        { 'categories.parent': formulaCategory._id }
+      ]
+    }).sort({ '_id': -1 }).limit(10);
+
+    return {
+      props: {
+        featuredSchedule: JSON.parse(JSON.stringify(featuredSchedule)),
+        liveSchedule: JSON.parse(JSON.stringify(liveSchedule)),
+        footballSchedule: JSON.parse(JSON.stringify(footballSchedule)),
+        footballhighlight: JSON.parse(JSON.stringify(footballhighlight)),
+        ufchighlight: JSON.parse(JSON.stringify(ufchighlight)),
+        national: JSON.parse(JSON.stringify(national)),
+        formula: JSON.parse(JSON.stringify(formula)),
+        copa: JSON.parse(JSON.stringify(copa)),
+        epl: JSON.parse(JSON.stringify(epl)),
         uefa: JSON.parse(JSON.stringify(uefa)),
-       fifa: JSON.parse(JSON.stringify(fifa)),
-      euro: JSON.parse(JSON.stringify(euro)),
-       iccwc: JSON.parse(JSON.stringify(iccwc)),
-     icctest: JSON.parse(JSON.stringify(icctest)),
-      asiacup: JSON.parse(JSON.stringify(asiacup)),
-      icct20: JSON.parse(JSON.stringify(icct20)),
-
-
-
-     
-                    
-      crickethighlight: JSON.parse(JSON.stringify(crickethighlight))},
-
-
-
-
-    }
-
-  
-
-  };
+        fifa: JSON.parse(JSON.stringify(fifa)),
+        euro: JSON.parse(JSON.stringify(euro)),
+        iccwc: JSON.parse(JSON.stringify(iccwc)),
+        icctest: JSON.parse(JSON.stringify(icctest)),
+        asiacup: JSON.parse(JSON.stringify(asiacup)),
+        icct20: JSON.parse(JSON.stringify(icct20)),
+        crickethighlight: JSON.parse(JSON.stringify(crickethighlight)),
+      }
+    };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return {
+      props: {
+        featuredSchedule: [],
+        liveSchedule: [],
+        footballSchedule: [],
+        footballhighlight: [],
+        ufchighlight: [],
+        national: [],
+        formula: [],
+        copa: [],
+        epl: [],
+        uefa: [],
+        fifa: [],
+        euro: [],
+        iccwc: [],
+        icctest: [],
+        asiacup: [],
+        icct20: [],
+        crickethighlight: [],
+      }
+    };
+  }
+}
