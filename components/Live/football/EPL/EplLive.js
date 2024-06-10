@@ -86,7 +86,7 @@ const EplLive = ({ epl }) => {
     const live = [];
     const recentlyScheduled = [];
 
-    national.forEach(item => {
+    epl.forEach(item => {
       const scheduledTime = new Date(item.time);
 
       if (scheduledTime <= now && scheduledTime >= new Date(now.getTime() - 3 * 60 * 60 * 1000)) {
@@ -109,7 +109,7 @@ const EplLive = ({ epl }) => {
       setShowRecentlyScheduledLeftScroll(false);
       setShowRecentlyScheduledRightScroll(recentlyScheduled.length > 6);
     }
-  }, [copa]);
+  }, [epl]);
 
   const handleLiveScroll = (scrollOffset) => {
     if (liveScrollRef.current) {
