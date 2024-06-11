@@ -4,6 +4,7 @@ import Image from 'next/image';
 import styled from "styled-components";
 import Footer from "@/components/Layout/Footer";
 import Header from "@/components/Layout/Header";
+import { useRouter } from 'next/router';
 
 const StyledContainer = styled.div`
   position: relative;
@@ -143,35 +144,18 @@ const Copyright = styled.div`
 
 export default function Login() {
   const { data: session } = useSession();
+  const router = useRouter();
+  const { callbackUrl } = router.query;
 
   useEffect(() => {
-    const initializeGoogleSignIn = () => {
-      google.accounts.id.initialize({
-        client_id: process.env.GOOGLE_ID,
-        callback: handleCredentialResponse,
-      });
-
-      google.accounts.id.prompt((notification) => {
-        if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-          console.log('One Tap prompt not displayed or skipped');
-        } else {
-          console.log('One Tap prompt displayed');
-        }
-      });
-    };
-
-    const handleCredentialResponse = (response) => {
-      console.log('Encoded JWT ID token: ' + response.credential);
-      signIn('google', { id_token: response.credential });
-    };
-
-    // Wait for the Google Identity Services script to load
-    if (typeof window !== 'undefined' && window.google) {
-      initializeGoogleSignIn();
-    } else {
-      window.onload = initializeGoogleSignIn;
+    if (session) {
+      router.push(callbackUrl || '/');
     }
-  }, []);
+  }, [session, router, callbackUrl]);
+
+  const handleSignIn = () => {
+    signIn('google', { callbackUrl: callbackUrl || '/' });
+  };
 
   const handleLogout = async () => {
     await signOut();
@@ -187,8 +171,8 @@ export default function Login() {
             {!session ? (
               <>
                 <Title>Now just one click to unlock the best</Title>
-                <p style={{ color:'red'}}>Log in with</p>
-                <Button onClick={() => signIn('google')}>
+                <p style={{ color: 'red' }}>Log in with</p>
+                <Button onClick={handleSignIn}>
                   <Image
                     src="https://tailus.io/sources/blocks/social/preview/images/google.svg"
                     alt="google logo"
@@ -206,7 +190,7 @@ export default function Login() {
                   <h4>{session.user.name}</h4>
                   <h4>{session.user.email}</h4>
                 </div>
-                <Button onClick={handleLogout} style={{backgroundColor: '#000'}}>
+                <Button onClick={handleLogout} style={{ backgroundColor: '#000' }}>
                   Logout
                 </Button>
               </>
