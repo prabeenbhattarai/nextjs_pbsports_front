@@ -1,6 +1,10 @@
 // pages/dmca.js
 import Head from 'next/head';
 import styled from 'styled-components';
+import Footer from "@/components/Layout/Footer";
+import Header from "@/components/Layout/Header";
+import Center from "@/components/Layout/Center";
+
 
 const Container = styled.div`
   font-family: Arial, sans-serif;
@@ -32,11 +36,15 @@ const Text = styled.p`
 
 export default function DMCA() {
   return (
+    <>
     <Container>
       <Head>
         <title>DMCA - PBSports</title>
       </Head>
+    <Header/>
+    
       <Title>DMCA Notice</Title>
+    <Center/>
       <Section>
         <Subtitle>Introduction</Subtitle>
         <Text>
@@ -69,6 +77,10 @@ export default function DMCA() {
           We use Google details for login purposes and we take the security of our users' personal information seriously. Your details are completely safe with us. If you have any concerns regarding your personal information, please do not hesitate to contact us at <a href="mailto:support@pbsports.net">support@pbsports.net</a>.
         </Text>
       </Section>
+          </Center>
     </Container>
+          
+          <Footer/>
+          </>
   );
 }
