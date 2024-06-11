@@ -7,7 +7,7 @@ const PlayButton = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   display: none;
-  cursor: pointer;
+  cursor:pointer;
 `;
 
 const LiveWrapper = styled.div`
@@ -74,7 +74,7 @@ const Tag = styled.div`
   font-weight: bold;
 `;
 
-export default function LiveBox({ _id, title, description, url, time, images, showScheduledTimeTag, formattedTime }) {
+export default function LiveBox({ _id, title, description, url, time, images, showScheduledTimeTag }) {
   // Ensure that required properties are present before rendering the component
   if (!title || !description || !images || images.length === 0) {
     return null; // Do not render the component if required properties are missing
@@ -89,7 +89,7 @@ export default function LiveBox({ _id, title, description, url, time, images, sh
           <Image src={images[0]} alt="Pbsports" />
           {showScheduledTimeTag && (
             <Tag>
-              {formattedTime}
+              {new Intl.DateTimeFormat('en-US', { weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: true }).format(new Date(time))}
             </Tag>
           )}
         </ImageContainer>
