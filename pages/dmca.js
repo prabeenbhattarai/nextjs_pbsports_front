@@ -37,7 +37,7 @@ const Text = styled.p`
 export default function DMCA() {
   return (
  <>
-      </Header>
+      <Header/>
     <Container>
       
       <Section>
@@ -75,7 +75,7 @@ export default function DMCA() {
          
     </Container>
           
-          </Footer>
+          <Footer/>
           </>
   );
 }
