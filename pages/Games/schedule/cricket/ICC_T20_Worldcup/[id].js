@@ -191,7 +191,7 @@ export default function SchedulePage({ schedule }) {
             </VideoContainer>
           ) : (
             <RightSide>
-              <Image src={schedule.images[0]} alt="Scheduled Event" />
+<Image src={schedule && schedule.images ? schedule.images[0] : ''} alt="Scheduled Event" />
               <Overlay>
                 <Title>Please log in to watch the video</Title>
                 <Link href={`/user/Auth/login?callbackUrl=${encodeURIComponent(router.asPath)}`}>
