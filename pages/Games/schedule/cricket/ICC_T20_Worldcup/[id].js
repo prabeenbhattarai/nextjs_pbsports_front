@@ -113,14 +113,14 @@ const TimerContainer = styled.div`
   }
 `;
 
-const ButtonContainer = styled.div`
+ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
 `;
 
-const LoginButton = styled.button`
+LoginButton = styled.button`
   padding: 10px 20px;
   background-color: #dc5b0d;
   color: #ffffff;
@@ -130,7 +130,7 @@ const LoginButton = styled.button`
   margin-top: 10px;
 `;
 
-const AlreadyUserText = styled.p`
+AlreadyUserText = styled.p`
   color: #dc5b0d;
 `;
 
@@ -166,7 +166,7 @@ export default function SchedulePage({ schedule }) {
 
   useEffect(() => {
     if (showVideo && !session) {
-      router.push('/user/Auth/login'); // Redirect to login page if not logged in
+      router.push(`/user/Auth/login?callbackUrl=${encodeURIComponent(router.asPath)}`);
     }
   }, [showVideo, session, router]);
 
@@ -194,7 +194,7 @@ export default function SchedulePage({ schedule }) {
               <Image src={schedule.images[0]} alt="Scheduled Event" />
               <Overlay>
                 <Title>Please log in to watch the video</Title>
-                <Link href="/user/Auth/login">
+                <Link href={`/user/Auth/login?callbackUrl=${encodeURIComponent(router.asPath)}`}>
                   <LoginButton>Login</LoginButton>
                 </Link>
               </Overlay>
@@ -211,7 +211,7 @@ export default function SchedulePage({ schedule }) {
               <Desc>{schedule.description}</Desc>
               {!session && (
                 <ButtonContainer>
-                  <Link href="/user/Auth/login">
+                  <Link href={`/user/Auth/login?callbackUrl=${encodeURIComponent(router.asPath)}`}>
                     <LoginButton>Login</LoginButton>
                   </Link>
                   <AlreadyUserText>Already a user?</AlreadyUserText>
@@ -233,15 +233,4 @@ function formatTimeLeft(timeLeft) {
   const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
   return `${days}D ${hours}H :${minutes}M :${seconds}s`;
-}
-
-export async function getServerSideProps(context) {
-  await mongooseConnect();
-  const { id } = context.query;
-  const schedule = await Schedule.findById(id);
-  return {
-    props: {
-      schedule: JSON.parse(JSON.stringify(schedule))
-    }
-  };
 }
