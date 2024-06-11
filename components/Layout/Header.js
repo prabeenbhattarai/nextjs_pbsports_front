@@ -199,8 +199,8 @@ export default function Header() {
    <NavLink href={"/dmca"} scrolled={scrolled}>
              dmca
             </NavLink>
-   <NavLink href={"/dmca"} scrolled={scrolled}>
-             more games
+   <NavLink href={"/games"} scrolled={scrolled}>
+             games
             </NavLink>
             {session ? (
               <NavLink href="/user/Auth/login">
