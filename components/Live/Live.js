@@ -85,9 +85,9 @@ const formatTime = (scheduledTime) => {
   const isTomorrow = scheduledDate.toDateString() === new Date(now.getTime() + 24 * 60 * 60 * 1000).toDateString();
 
   if (isToday) {
-    return `Today ${scheduledDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
+    return `Today, ${scheduledDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
   } else if (isTomorrow) {
-    return `Tomorrow ${scheduledDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
+    return `Tomm, ${scheduledDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
   } else {
     return `${scheduledDate.toLocaleString('default', { month: 'short' })} ${scheduledDate.getDate()} ${scheduledDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
   }
