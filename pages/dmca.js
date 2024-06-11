@@ -8,7 +8,7 @@ import Center from "@/components/Layout/Center";
 
 const Container = styled.div`
   font-family: Arial, sans-serif;
-  color: #333;
+  color: #EEEEEE;
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
@@ -36,9 +36,9 @@ const Text = styled.p`
 
 export default function DMCA() {
   return (
-    </Header>
+ 
     <Container>
-     
+        </Header>
       <Section>
         <Subtitle>Introduction</Subtitle>
         <Text>
