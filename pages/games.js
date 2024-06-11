@@ -7,7 +7,7 @@ import Center from "@/components/Layout/Center";
 
 const Container = styled.div`
   font-family: Arial, sans-serif;
-  color: #333;
+  color: #EEEEEE;
   padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
