@@ -36,9 +36,10 @@ const Text = styled.p`
 
 export default function DMCA() {
   return (
- 
+ <>
+      </Header>
     <Container>
-        </Header>
+      
       <Section>
         <Subtitle>Introduction</Subtitle>
         <Text>
@@ -71,10 +72,10 @@ export default function DMCA() {
           We use Google details for login purposes and we take the security of our users' personal information seriously. Your details are completely safe with us. If you have any concerns regarding your personal information, please do not hesitate to contact us at <a href="mailto:support@pbsports.net">support@pbsports.net</a>.
         </Text>
       </Section>
-          </Center>
+         
     </Container>
           
           </Footer>
-         
+          </>
   );
 }
