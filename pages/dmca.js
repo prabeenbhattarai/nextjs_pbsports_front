@@ -36,15 +36,9 @@ const Text = styled.p`
 
 export default function DMCA() {
   return (
-    <>
+    </Header>
     <Container>
-      <Head>
-        <title>DMCA - PBSports</title>
-      </Head>
-    <Header/>
-    
-      <Title>DMCA Notice</Title>
-    <Center/>
+     
       <Section>
         <Subtitle>Introduction</Subtitle>
         <Text>
@@ -80,7 +74,7 @@ export default function DMCA() {
           </Center>
     </Container>
           
-          <Footer/>
-          </>
+          </Footer>
+         
   );
 }
