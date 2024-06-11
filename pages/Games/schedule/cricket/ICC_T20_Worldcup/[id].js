@@ -113,14 +113,14 @@ const TimerContainer = styled.div`
   }
 `;
 
-ButtonContainer = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
 `;
 
-LoginButton = styled.button`
+const LoginButton = styled.button`
   padding: 10px 20px;
   background-color: #dc5b0d;
   color: #ffffff;
@@ -130,7 +130,7 @@ LoginButton = styled.button`
   margin-top: 10px;
 `;
 
-AlreadyUserText = styled.p`
+const AlreadyUserText = styled.p`
   color: #dc5b0d;
 `;
 
