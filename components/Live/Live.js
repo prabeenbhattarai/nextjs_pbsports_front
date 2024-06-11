@@ -4,22 +4,20 @@ import LiveBox from "../LiveBox";
 import Center from "../Layout/Center";
 
 const ScheduleGridContainer = styled.div`
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-  position: relative; /* Position relative for absolute positioning of scroll buttons */
+  overflow-x: hidden;
+  position: relative;
 `;
 
 const ScheduleGrid = styled.div`
   display: flex;
   gap: 20px;
-  margin-top: 10px; /* Set scroll behavior for smooth scrolling */
+  margin-top: 10px;
   scroll-behavior: smooth;
-  /* Ensure the grid can be scrolled horizontally */
   overflow-x: auto;
-  /* Hide the scrollbar */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   &::-webkit-scrollbar {
-    display: none; /* WebKit */
+    display: none;
   }
 `;
 
@@ -27,8 +25,8 @@ const SectionTitle = styled.h3`
   color: #d60202;
   margin-right: 20px;
   margin-bottom: 0;
-  font-size: 1.1rem; /* Add margin to separate LiveNow from ScheduleGrid */
-  display: ${({ hide }) => (hide ? "none" : "block")}; /* Hide the title if there's no content */
+  font-size: 1.1rem;
+  display: ${({ hide }) => (hide ? "none" : "block")};
 `;
 
 const ScrollButton = styled.button`
@@ -36,15 +34,14 @@ const ScrollButton = styled.button`
   border: none;
   cursor: pointer;
   position: absolute;
-  top: calc(50% - 24px); /* Adjust position to be centered relative to the image */
+  top: calc(50% - 24px);
   transform: translateY(-50%);
-  z-index: 1; /* Ensure the buttons are above the content */
-  width: 48px; /* Adjust width and height of the buttons */
+  z-index: 1;
+  width: 48px;
   height: 48px;
-  display: ${({ hide }) => (hide ? 'none' : 'flex')}; /* Hide the button if not needed */
+  display: ${({ hide }) => (hide ? 'none' : 'flex')};
   justify-content: center;
   align-items: center;
-  /* Use border-radius to create a square shape */
   border-radius: 10px; 
 `;
 
@@ -63,7 +60,7 @@ const ScrollIcon = styled.svg`
 `;
 
 const LeftScrollIcon = styled(ScrollIcon)`
-  transform: rotate(0deg); /* Rotate the right-facing arrow icon to face left */
+  transform: rotate(0deg);
 `;
 
 const RightScrollIcon = styled(ScrollIcon)``;
@@ -79,6 +76,22 @@ const Tag = styled.div`
   border-radius: 10px;
   font-weight: bold;
 `;
+
+const formatTime = (scheduledTime) => {
+  const now = new Date();
+  const scheduledDate = new Date(scheduledTime);
+
+  const isToday = scheduledDate.toDateString() === now.toDateString();
+  const isTomorrow = scheduledDate.toDateString() === new Date(now.getTime() + 24 * 60 * 60 * 1000).toDateString();
+
+  if (isToday) {
+    return `Today ${scheduledDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
+  } else if (isTomorrow) {
+    return `Tomorrow ${scheduledDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
+  } else {
+    return `${scheduledDate.toLocaleString('default', { month: 'short' })} ${scheduledDate.getDate()} ${scheduledDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
+  }
+};
 
 const Live = ({ schedule }) => {
   const liveScrollRef = useRef(null);
@@ -98,7 +111,10 @@ const Live = ({ schedule }) => {
       if (scheduledTime <= now && scheduledTime >= new Date(now.getTime() - 3 * 60 * 60 * 1000)) {
         live.push(item);
       } else if (scheduledTime > now) {
-        recentlyScheduled.push(item);
+        recentlyScheduled.push({
+          ...item,
+          formattedTime: formatTime(scheduledTime)
+        });
       }
     });
 
