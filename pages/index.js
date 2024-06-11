@@ -117,112 +117,112 @@ export async function getServerSideProps() {
         { categories: cricketCategory._id },
         { 'categories.parent': cricketCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const footballSchedule = await Schedule.find({
       $or: [
         { categories: footballCategory._id },
         { 'categories.parent': footballCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const crickethighlight = await Highlight.find({
       $or: [
         { categories: cricketCategory._id },
         { 'categories.parent': cricketCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const footballhighlight = await Highlight.find({
       $or: [
         { categories: footballCategory._id },
         { 'categories.parent': footballCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const ufchighlight = await Highlight.find({
       $or: [
         { categories: ufcCategory._id },
         { 'categories.parent': ufcCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const national = await Schedule.find({
       $or: [
         { categories: nationalCategory._id },
         { 'categories.parent': nationalCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const copa = await Schedule.find({
       $or: [
         { categories: copaCategory._id },
         { 'categories.parent': copaCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const euro = await Schedule.find({
       $or: [
         { categories: euroCategory._id },
         { 'categories.parent': euroCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const epl = await Schedule.find({
       $or: [
         { categories: eplCategory._id },
         { 'categories.parent': eplCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const uefa = await Schedule.find({
       $or: [
         { categories: uefaCategory._id },
         { 'categories.parent': uefaCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const fifa = await Schedule.find({
       $or: [
         { categories: fifaCategory._id },
         { 'categories.parent': fifaCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const iccwc = await Schedule.find({
       $or: [
         { categories: iccwcCategory._id },
         { 'categories.parent': iccwcCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const icctest = await Schedule.find({
       $or: [
         { categories: icctestCategory._id },
         { 'categories.parent': icctestCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const asiacup = await Schedule.find({
       $or: [
         { categories: asiacupCategory._id },
         { 'categories.parent': asiacupCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const icct20 = await Schedule.find({
       $or: [
         { categories: icct20Category._id },
         { 'categories.parent': icct20Category._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     const formula = await Schedule.find({
       $or: [
         { categories: formulaCategory._id },
         { 'categories.parent': formulaCategory._id }
       ]
-    }).sort({ '_id': -1 }).limit(10);
+    }).sort({ '_id': -1 }).limit(100);
 
     return {
       props: {
