@@ -109,7 +109,7 @@ export default function StreamingDetails() {
            
           </List>
           <LogoContainer>
-            <Logo src="/icc" alt="ICC Cricket World Cup" />
+            <Logo src="/icc.jpg" alt="ICC Cricket World Cup" />
             <Logo src="/ipl.png" alt="IPL" />
             <Logo src="/icct20.png" alt="BBL" />
           
