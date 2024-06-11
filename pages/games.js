@@ -83,14 +83,14 @@ export default function StreamingDetails() {
             <ListItem>Ligue 1</ListItem>
           </List>
           <LogoContainer>
-            <Logo src="/logos/uefa-champions-league.png" alt="UEFA Champions League" />
-            <Logo src="/logos/laliga.png" alt="La Liga" />
-            <Logo src="/logos/euro-cup.png" alt="Euro Cup" />
-            <Logo src="/logos/copa-america.png" alt="Copa America" />
-            <Logo src="/logos/premier-league.png" alt="Premier League" />
-            <Logo src="/logos/serie-a.png" alt="Serie A" />
-            <Logo src="/logos/bundesliga.png" alt="Bundesliga" />
-            <Logo src="/logos/ligue-1.png" alt="Ligue 1" />
+            <Logo src="/uefa.png" alt="UEFA Champions League" />
+            <Logo src="/laliga.png" alt="La Liga" />
+            <Logo src="/euro.png" alt="Euro Cup" />
+            <Logo src="/copa.png" alt="Copa America" />
+            <Logo src="/premier.jpeg" alt="Premier League" />
+            <Logo src="/series" alt="Serie A" />
+
+            <Logo src="/ligue1.png" alt="Ligue 1" />
           </LogoContainer>
         </Section>
         
@@ -102,18 +102,17 @@ export default function StreamingDetails() {
           <List>
             <ListItem>ICC Cricket World Cup</ListItem>
             <ListItem>Indian Premier League (IPL)</ListItem>
-            <ListItem>Big Bash League (BBL)</ListItem>
-            <ListItem>Pakistan Super League (PSL)</ListItem>
-            <ListItem>The Ashes</ListItem>
-            <ListItem>Caribbean Premier League (CPL)</ListItem>
+            <ListItem>ICC Womens Cricket Worldcup</ListItem>
+            <ListItem>ICC Cricket Test Worldcup</ListItem>
+                        <ListItem>ICC Mens T20  Worldcup</ListItem>
+
+           
           </List>
           <LogoContainer>
-            <Logo src="/logos/icc-world-cup.png" alt="ICC Cricket World Cup" />
-            <Logo src="/logos/ipl.png" alt="IPL" />
-            <Logo src="/logos/bbl.png" alt="BBL" />
-            <Logo src="/logos/psl.png" alt="PSL" />
-            <Logo src="/logos/ashes.png" alt="The Ashes" />
-            <Logo src="/logos/cpl.png" alt="CPL" />
+            <Logo src="/icc" alt="ICC Cricket World Cup" />
+            <Logo src="/ipl.png" alt="IPL" />
+            <Logo src="/icct20.png" alt="BBL" />
+          
           </LogoContainer>
         </Section>
 
@@ -131,13 +130,13 @@ export default function StreamingDetails() {
             <ListItem>United States Grand Prix</ListItem>
           </List>
           <LogoContainer>
-            <Logo src="/logos/f1.png" alt="Formula 1" />
-            <Logo src="/logos/australian-gp.png" alt="Australian Grand Prix" />
-            <Logo src="/logos/monaco-gp.png" alt="Monaco Grand Prix" />
-            <Logo src="/logos/british-gp.png" alt="British Grand Prix" />
-            <Logo src="/logos/italian-gp.png" alt="Italian Grand Prix" />
-            <Logo src="/logos/singapore-gp.png" alt="Singapore Grand Prix" />
-            <Logo src="/logos/us-gp.png" alt="United States Grand Prix" />
+            <Logo src="/aus.jpeg" alt="Formula 1" />
+            <Logo src="/monoco.webp" alt="Australian Grand Prix" />
+            <Logo src="/british.png" alt="Monaco Grand Prix" />
+            <Logo src="/italy.png" alt="British Grand Prix" />
+            <Logo src="/singa.png" alt="Italian Grand Prix" />
+            <Logo src="/united.png" alt="Singapore Grand Prix" />
+         
           </LogoContainer>
         </Section>
 
@@ -152,10 +151,10 @@ export default function StreamingDetails() {
             <ListItem>UFC Pay-Per-View Events</ListItem>
           </List>
           <LogoContainer>
-            <Logo src="/logos/ufc.png" alt="UFC" />
-            <Logo src="/logos/ufc-fight-night.png" alt="UFC Fight Night" />
-            <Logo src="/logos/ufc-espn.png" alt="UFC on ESPN" />
-            <Logo src="/logos/ufc-ppv.png" alt="UFC Pay-Per-View" />
+            <Logo src="/ufcfight.avif" alt="UFC" />
+            <Logo src="/ufcespn.webp" alt="UFC Fight Night" />
+            <Logo src="/ufcpng" alt="UFC on ESPN" />
+            
           </LogoContainer>
         </Section>
       </Container>
