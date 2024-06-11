@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import { styled } from "styled-components";
 
@@ -75,13 +74,13 @@ const Tag = styled.div`
   font-weight: bold;
 `;
 
-export default function IccT20Box({ _id, title, description, url, time, images, showScheduledTimeTag,formattedTime }) {
+export default function IccT20Box({ _id, title, description, url, time, images, showScheduledTimeTag }) {
   // Ensure that required properties are present before rendering the component
   if (!title || !description || !images || images.length === 0) {
     return null; // Do not render the component if required properties are missing
   }
 
-  const link = '/Games/schedule/cricket/ICC_T20_Worldcup/' + _id;
+  const link = 'Games/schedule/cricket/ICC_T20_Worldcup/' + _id;
 
   return (
     <Link href={link} passHref>
@@ -90,7 +89,7 @@ export default function IccT20Box({ _id, title, description, url, time, images, 
           <Image src={images[0]} alt="Pbsports" />
           {showScheduledTimeTag && (
             <Tag>
-     {formattedTime}
+              {new Intl.DateTimeFormat('en-US', { weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: true }).format(new Date(time))}
             </Tag>
           )}
         </ImageContainer>
