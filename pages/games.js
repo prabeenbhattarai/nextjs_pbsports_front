@@ -88,7 +88,7 @@ export default function StreamingDetails() {
             <Logo src="/euro.png" alt="Euro Cup" />
             <Logo src="/copa.png" alt="Copa America" />
             <Logo src="/premier.jpeg" alt="Premier League" />
-            <Logo src="/series" alt="Serie A" />
+            <Logo src="/series.png" alt="Serie A" />
 
             <Logo src="/ligue1.png" alt="Ligue 1" />
           </LogoContainer>
@@ -133,7 +133,7 @@ export default function StreamingDetails() {
             <Logo src="/aus.jpeg" alt="Formula 1" />
             <Logo src="/monoco.webp" alt="Australian Grand Prix" />
             <Logo src="/british.png" alt="Monaco Grand Prix" />
-            <Logo src="/italy.png" alt="British Grand Prix" />
+            <Logo src="/italy.avif" alt="British Grand Prix" />
             <Logo src="/singa.png" alt="Italian Grand Prix" />
             <Logo src="/united.png" alt="Singapore Grand Prix" />
          
@@ -153,7 +153,7 @@ export default function StreamingDetails() {
           <LogoContainer>
             <Logo src="/ufcfight.avif" alt="UFC" />
             <Logo src="/ufcespn.webp" alt="UFC Fight Night" />
-            <Logo src="/ufcpng" alt="UFC on ESPN" />
+            <Logo src="/ufc.png" alt="UFC on ESPN" />
             
           </LogoContainer>
         </Section>
