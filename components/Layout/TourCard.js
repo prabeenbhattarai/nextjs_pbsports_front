@@ -46,27 +46,27 @@ const TourDate = styled.p`
 
 const tourData = [
   {
-    imageSrc: '/tour/1.png',
+    imageSrc: '/tour/1.webp',
     title: 'F1 ARAMCO GRAN PREMIO DE ESPAÑA',
     date: '21 Jun - 23 Jun, 2024',
   },
   {
-    imageSrc: '/tour/2.png',
+    imageSrc: '/tour/2.webp',
     title: 'Vitality Blast T20, 2024',
     date: '30 May - 14 Sep, 2024',
   },
   {
-    imageSrc: '/tour/3.png',
+    imageSrc: '/tour/3.webp',
     title: 'Sher-E-Punjab T20, 2024',
     date: '10 Jun - 27 Jun, 2024',
   },
   {
-    imageSrc: '/tour/4.png',
+    imageSrc: '/tour/4.webp',
     title: 'Copa America',
     date: '21 Jun - 15 Jul, 2024',
   },
   {
-    imageSrc: '/tour/5.png',
+    imageSrc: '/tour/5.webp',
     title: 'Bengal Pro T20 League, 2024',
     date: '11 Jun - 28 Jun, 2024',
   },
