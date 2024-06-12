@@ -1,29 +1,25 @@
-import Highlights from "@/components/Highlight/CricketHighlights";
-import Featured from "@/components/Layout/Featured";
-import Footer from "@/components/Layout/Footer";
+import dynamic from 'next/dynamic';
 import Header from "@/components/Layout/Header";
+import Footer from "@/components/Layout/Footer";
 
-import Live from "@/components/Live/Live";
-
-import { mongooseConnect } from "@/lib/mongoose";
-import { Highlight } from "@/models/Highlight";
-import { Schedule } from "@/models/Schedule";
-import { Category } from "@/models/Category";
-import FootballLive from "@/components/Live/football/FootballLive";
-import FootballHighlights from "@/components/Highlight/Footballhighlights";
-import UfcHighlights from "@/components/Highlight/Ufchighlights";
-import CricketHighlights from "@/components/Highlight/CricketHighlights";
-import NationalLive from "@/components/Live/NationalGames/NationalLive";
-import FormulaLive from "@/components/Live/Formula1/FormulaLive";
-import CopaLive from "@/components/Live/football/CopaAmerica/CopaLive";
-import EplLive from "@/components/Live/football/EPL/EplLive";
-import UefaLive from "@/components/Live/football/UEFA/UefaLive";
-import EuroLive from "@/components/Live/football/Euro_Cup/EuroLive";
-import FifaLive from "@/components/Live/football/Fifa/FifaLive";
-import IccLive from "@/components/Live/cricket/ICC_WC/IccLive";
-import IccTestLive from "@/components/Live/cricket/ICC_Test/IccTestLive";
-import AsiaLive from "@/components/Live/cricket/Asia_Cup/AsiaLive";
-import IccT20Live from "@/components/Live/cricket/ICC_T20/IccT20Live";
+// Use dynamic imports for other components
+const Featured = dynamic(() => import('@/components/Layout/Featured'));
+const Live = dynamic(() => import('@/components/Live/Live'));
+const FootballLive = dynamic(() => import('@/components/Live/football/FootballLive'));
+const FootballHighlights = dynamic(() => import('@/components/Highlight/Footballhighlights'));
+const UfcHighlights = dynamic(() => import('@/components/Highlight/Ufchighlights'));
+const CricketHighlights = dynamic(() => import('@/components/Highlight/CricketHighlights'));
+const NationalLive = dynamic(() => import('@/components/Live/NationalGames/NationalLive'));
+const FormulaLive = dynamic(() => import('@/components/Live/Formula1/FormulaLive'));
+const CopaLive = dynamic(() => import('@/components/Live/football/CopaAmerica/CopaLive'));
+const EplLive = dynamic(() => import('@/components/Live/football/EPL/EplLive'));
+const UefaLive = dynamic(() => import('@/components/Live/football/UEFA/UefaLive'));
+const EuroLive = dynamic(() => import('@/components/Live/football/Euro_Cup/EuroLive'));
+const FifaLive = dynamic(() => import('@/components/Live/football/Fifa/FifaLive'));
+const IccLive = dynamic(() => import('@/components/Live/cricket/ICC_WC/IccLive'));
+const IccTestLive = dynamic(() => import('@/components/Live/cricket/ICC_Test/IccTestLive'));
+const AsiaLive = dynamic(() => import('@/components/Live/cricket/Asia_Cup/AsiaLive'));
+const IccT20Live = dynamic(() => import('@/components/Live/cricket/ICC_T20/IccT20Live'));
 
 const styles = {
   container: {
@@ -69,7 +65,6 @@ export default function HomePage({
       {uefa.length > 0 && <UefaLive uefa={uefa} />}
       {national.length > 0 && <NationalLive national={national} />}
       {formula.length > 0 && <FormulaLive formula={formula} />}
-  
       {crickethighlight.length > 0 && <CricketHighlights crickethighlight={crickethighlight} />}
       {footballhighlight.length > 0 && <FootballHighlights footballhighlight={footballhighlight} />}
       {ufchighlight.length > 0 && <UfcHighlights ufchighlight={ufchighlight} />}
