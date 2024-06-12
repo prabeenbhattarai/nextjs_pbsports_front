@@ -2,7 +2,6 @@ import Highlights from "@/components/Highlight/CricketHighlights";
 import Featured from "@/components/Layout/Featured";
 import Footer from "@/components/Layout/Footer";
 import Header from "@/components/Layout/Header";
-import TourCard from "@/components/Layout/TourCard";
 
 import Live from "@/components/Live/Live";
 
@@ -68,7 +67,6 @@ export default function HomePage({
       {euro.length > 0 && <EuroLive euro={euro} />}
       {epl.length > 0 && <EplLive epl={epl} />}
       {uefa.length > 0 && <UefaLive uefa={uefa} />}
-  <TourCard />
       {national.length > 0 && <NationalLive national={national} />}
       {formula.length > 0 && <FormulaLive formula={formula} />}
   
